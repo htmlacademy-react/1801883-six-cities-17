@@ -1,7 +1,7 @@
 import SortingForm from '../sorting-form/sorting-form';
-import OfferItem from '../offer-item/offer-item';
+import OfferCard from '../offer-card/offer-card';
 
-export default function OffersList(): JSX.Element {
+export default function OfferCardsList(): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -9,11 +9,11 @@ export default function OffersList(): JSX.Element {
       <SortingForm />
 
       <div className="cities__places-list places__list tabs__content">
-        <OfferItem />
-        <OfferItem />
-        <OfferItem />
-        <OfferItem />
-        <OfferItem />
+        <OfferCard />
+        <OfferCard />
+        <OfferCard />
+        <OfferCard />
+        <OfferCard />
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 import TabsList from '../../components/tabs-list/tabs-list';
-import OffersList from '../../components/offers-list/offers-list';
+import OfferCardsList from '../../components/offer-cards-list/offer-cards-list';
 import Map from '../../components/map/map';
 
 export default function MainPage(): JSX.Element {
@@ -14,7 +14,7 @@ export default function MainPage(): JSX.Element {
 
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList />
+            <OfferCardsList />
             <Map />
           </div>
         </div>

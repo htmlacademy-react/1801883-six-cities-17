@@ -1,18 +1,24 @@
 import Premium from './components/premium';
 import Price from './components/price';
-import BookmarkButton from './components/bookmark-button';
+import BookmarkButton from '../bookmark-button/bookmark-button';
 import Rating from './components/rating';
 import Title from './components/title';
 import Type from './components/type';
 
-export default function OfferItem(): JSX.Element {
+export default function OfferCard(): JSX.Element {
   return (
     <article className="cities__card place-card">
       <Premium />
 
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
+          <img
+            className="place-card__image"
+            src="img/apartment-01.jpg"
+            width="260"
+            height="200"
+            alt="Place image"
+          />
         </a>
       </div>
 
