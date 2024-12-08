@@ -1,7 +1,19 @@
+import { Offer, User } from '../../types';
 import MainPage from '../../pages/main-page/main-page';
 
-export default function App (): JSX.Element {
+type AppProps = {
+  offers: Offer[];
+  favorites: Offer[];
+  user?: User;
+}
+
+
+export default function App ({offers, favorites, user}: AppProps): JSX.Element {
   return (
-    <MainPage />
+    <MainPage
+      offers={ offers }
+      favorites={ favorites }
+      user={ user }
+    />
   );
 }
