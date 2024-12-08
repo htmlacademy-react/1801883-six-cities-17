@@ -3,6 +3,7 @@ import { Offer } from '../types';
 
 const MIN_NUMBER = 0;
 
+
 export const getFavorites = (offers: Offer[]): Offer[] => {
   const favorites: Offer[] = [];
   const favoritesNumber = generateRandomNumber(MIN_NUMBER, offers.length);

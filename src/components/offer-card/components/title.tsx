@@ -1,7 +1,12 @@
-export default function Title(): JSX.Element {
+type TitleProps = {
+  title: string;
+}
+
+
+export default function Title({title}: TitleProps): JSX.Element {
   return (
     <h2 className="place-card__name">
-      <a href="#">Beautiful &amp; luxurious apartment at great location</a>
+      <a href="#">{title}</a>
     </h2>
   );
 }
