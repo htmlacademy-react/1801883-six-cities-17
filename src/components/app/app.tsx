@@ -3,16 +3,16 @@ import MainPage from '../../pages/main-page/main-page';
 
 type AppProps = {
   offers: Offer[];
-  favorites: Offer[];
+  favoriteOffers: Offer[];
   user?: User;
 }
 
 
-export default function App ({offers, favorites, user}: AppProps): JSX.Element {
+export default function App ({offers, favoriteOffers, user}: AppProps): JSX.Element {
   return (
     <MainPage
       offers={ offers }
-      favorites={ favorites }
+      favoriteOffers={ favoriteOffers }
       user={ user }
     />
   );

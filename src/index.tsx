@@ -13,7 +13,7 @@ root.render(
   <React.StrictMode>
     <App
       offers={ mockData.offers }
-      favorites={ mockData.favorites }
+      favoriteOffers={ mockData.favorites }
       user={ mockData.user }
     />
   </React.StrictMode>

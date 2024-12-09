@@ -2,13 +2,13 @@ import { User } from '../../types';
 import UserInfo from './components/user-info';
 
 type HeaderProps = {
-  isLoginVisible?: boolean;
+  isLoginHidden?: boolean;
   user?: User;
   favoritesNumber?: number;
 }
 
 
-export default function Header({isLoginVisible = true, user, favoritesNumber}: HeaderProps): JSX.Element {
+export default function Header({isLoginHidden = false, user, favoritesNumber}: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -25,7 +25,7 @@ export default function Header({isLoginVisible = true, user, favoritesNumber}: H
             </a>
           </div>
 
-          {isLoginVisible && (
+          {!isLoginHidden && (
             user
               ? <UserInfo isLogged email={ user.email } favoritesNumber={ favoritesNumber } />
               : <UserInfo />
