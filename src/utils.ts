@@ -12,7 +12,7 @@ const getPageName = (path: string): Page => {
       return key as Page;
     }
   }
-  throw new Error;
+  return 'Main';
 };
 
 export { capitalizeFirstLetter, getPageName };

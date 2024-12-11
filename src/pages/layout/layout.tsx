@@ -1,6 +1,7 @@
 import { AppRoute } from '../../consts';
 import { User } from '../../types';
 import { getPageName } from '../../utils';
+import { Helmet } from 'react-helmet-async';
 import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../../components/header/header';
@@ -23,6 +24,10 @@ export default function Layout({favoriteCount, user}: LayoutProps): JSX.Element 
 
   return (
     <div className={ divClass }>
+      <Helmet>
+        <title>{ AppRoute[currentPageName].Title }</title>
+      </Helmet>
+
       <Header isLoginHidden={ currentPageName === 'Login' } isMainPage={ currentPageName === 'Main' } user={ user } favoriteCount={ favoriteCount } />
 
       <Outlet />
