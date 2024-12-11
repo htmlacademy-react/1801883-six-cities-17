@@ -4,7 +4,7 @@ import { Page } from './types';
 
 const capitalizeFirstLetter = (inputWord: string): string => inputWord[0].toUpperCase() + inputWord.slice(1);
 
-const getPageName = (path: string): Page | null => {
+const getPageName = (path: string): Page => {
   const processedPath = path.replace(/\/offer\/[^/]+/, '/offer/:id');
 
   for (const key in AppRoute) {
@@ -12,7 +12,7 @@ const getPageName = (path: string): Page | null => {
       return key as Page;
     }
   }
-  return null;
+  throw new Error;
 };
 
 export { capitalizeFirstLetter, getPageName };

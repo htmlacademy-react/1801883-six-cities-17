@@ -1,6 +1,7 @@
 import { AppRoute } from '../../consts';
 import { User } from '../../types';
 import { getPageName } from '../../utils';
+import classNames from 'classnames';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import Header from '../../components/header/header';
 
@@ -13,9 +14,14 @@ type LayoutProps = {
 export default function Layout({favoriteCount, user}: LayoutProps): JSX.Element {
   const currentPagePath = useLocation().pathname;
   const currentPageName = getPageName(currentPagePath);
+  const isAdditionalClass = currentPageName === 'Main' || currentPageName === 'Login' || currentPageName === 'Favorites' && favoriteCount === 0;
+
+  const divClass = classNames('page', {
+    [AppRoute[currentPageName].AdditionalClass]: isAdditionalClass
+  });
 
   return (
-    <div className="page page--gray page--main">
+    <div className={ divClass }>
       <Header isLoginHidden={ currentPageName === 'Login' } user={ user } favoriteCount={ favoriteCount } />
 
       <Outlet />
@@ -34,7 +40,6 @@ export default function Layout({favoriteCount, user}: LayoutProps): JSX.Element 
           </Link>
         </footer>
       )}
-
     </div>
   );
 }
