@@ -1,4 +1,4 @@
-import { CITIES, OFFER_TYPES } from './consts';
+import { CITIES, OFFER_TYPES, AppRoute } from './consts';
 
 type Location = {
   latitude: number;
@@ -30,4 +30,6 @@ type User = {
   token: string;
 }
 
-export type { Offer, Location, User };
+type Page = keyof typeof AppRoute;
+
+export type { Offer, Location, User, Page };
