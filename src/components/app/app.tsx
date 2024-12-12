@@ -1,7 +1,8 @@
-import { AppRoute } from '../../consts';
+import { AppRoute, AuthorizationStatus } from '../../consts';
 import { Offer, User } from '../../types';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import PrivateRoute from '../private-route/private-route';
 import Layout from '../../pages/layout/layout';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -17,6 +18,8 @@ type AppProps = {
 
 
 export default function App ({offers, favoriteOffers, user}: AppProps): JSX.Element {
+  const authorizationStatus = user === null ? AuthorizationStatus.NoAuth : AuthorizationStatus.Auth;
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -36,7 +39,11 @@ export default function App ({offers, favoriteOffers, user}: AppProps): JSX.Elem
             />
             <Route
               path={ AppRoute.Favorites.Path }
-              element={ <FavoritesPage favoriteOffers={ favoriteOffers } /> }
+              element={
+                <PrivateRoute authorizationStatus={ authorizationStatus } redirectRoute={ AppRoute.Login.Path }>
+                  <FavoritesPage favoriteOffers={ favoriteOffers } />
+                </PrivateRoute>
+              }
             />
             <Route
               path='*'

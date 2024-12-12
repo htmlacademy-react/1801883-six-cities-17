@@ -29,6 +29,12 @@ const AppRoute = {
   },
 } as const;
 
+const AuthorizationStatus = {
+  Auth: 'AUTH',
+  NoAuth: 'NO_AUTH',
+  Unknown: 'UNKNOWN'
+} as const;
+
 const RatingRange = { Min: 0, Max: 5 } as const;
 
 const SortTypes = {
@@ -46,4 +52,4 @@ const SortTypes = {
   }
 } as const;
 
-export { CITIES, OFFER_TYPES, AppRoute, RatingRange, SortTypes };
+export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus, RatingRange, SortTypes };
