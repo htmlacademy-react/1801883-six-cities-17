@@ -12,13 +12,13 @@ import ErrorPage from '../../pages/error-page/error-page';
 
 type AppProps = {
   offers: Offer[];
-  favoriteOffers: Offer[] | null;
-  user: User | null;
+  favoriteOffers?: Offer[];
+  user?: User;
 }
 
 
 export default function App ({offers, favoriteOffers, user}: AppProps): JSX.Element {
-  const authorizationStatus = user === null ? AuthorizationStatus.NoAuth : AuthorizationStatus.Auth;
+  const authorizationStatus = user ? AuthorizationStatus.Auth : AuthorizationStatus.NoAuth;
 
   return (
     <HelmetProvider>

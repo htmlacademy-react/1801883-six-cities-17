@@ -1,7 +1,7 @@
 import { Offer } from '../../types';
 
 type FavoritesPageProps = {
-  favoriteOffers: Offer[] | null;
+  favoriteOffers?: Offer[];
 }
 
 

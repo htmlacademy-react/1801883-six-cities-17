@@ -5,7 +5,7 @@ import UserInfo from './components/user-info';
 type HeaderProps = {
   isLoginHidden?: boolean;
   isMainPage?: boolean;
-  user: User | null;
+  user?: User;
   favoriteCount: number;
 }
 
