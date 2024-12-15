@@ -8,18 +8,18 @@ type OfferCardsListProps = {
 };
 
 const ListClassName = {
+  Main: {
+    Section: 'cities__places places',
+    Div: 'cities__places-list tabs__content'
+  },
   Near: {
     Section: 'near-places places',
     Div: 'near-places__list'
-  },
-  Default: {
-    Section: 'cities__places places',
-    Div: 'cities__places-list tabs__content'
   }
 } as const;
 
 
-export default function OfferCardsList({offers, listType = 'Default'}: OfferCardsListProps): JSX.Element {
+export default function OfferCardsList({offers, listType = 'Main'}: OfferCardsListProps): JSX.Element {
   return (
     <section className={ ListClassName[listType].Section }>
       {listType === 'Near'

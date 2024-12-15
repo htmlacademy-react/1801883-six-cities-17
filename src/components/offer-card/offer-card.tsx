@@ -1,4 +1,7 @@
 import { Offer } from '../../types';
+import { AppRoute } from '../../consts';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import Premium from './components/premium';
 import PreviewImage from './components/preview-image';
 import Price from './components/price';
@@ -13,7 +16,7 @@ type OfferCardProps = {
 }
 
 const CardClass = {
-  Default: {
+  Main: {
     Article: 'cities__card',
     DivImage: 'cities__image-wrapper'
   },
@@ -29,26 +32,30 @@ const CardClass = {
 
 
 export default function OfferCard({offer, cardType}: OfferCardProps): JSX.Element {
-  const {title, type, price, isFavorite, isPremium, rating, previewImage} = offer;
+  const {id, title, type, price, isFavorite, isPremium, rating, previewImage} = offer;
+  const currentLink = {
+    path: AppRoute.Offer.Path.replace(':id', id),
+    title: AppRoute.Offer.TitleLink
+  };
 
   return (
-    <article className={`${CardClass[cardType].Article} place-card`}>
+    <article className={classNames('place-card', CardClass[cardType].Article)}>
       {isPremium && <Premium />}
 
-      <div className={`${CardClass[cardType].DivImage} place-card__image-wrapper`}>
-        <a href="#">
-          <PreviewImage link={ previewImage } />
-        </a>
+      <div className={classNames('place-card__image-wrapper', CardClass[cardType].DivImage)}>
+        <Link to={ currentLink.path } title={ currentLink.title }>
+          <PreviewImage link={ previewImage } isSmall={ cardType === 'Favorite' } />
+        </Link>
       </div>
 
-      <div className="place-card__info">
+      <div className={classNames('place-card__info', {'favorites__card-info': cardType === 'Favorite'})}>
         <div className="place-card__price-wrapper">
           <Price price={ price }/>
           <BookmarkButton isFavorite={ isFavorite } />
         </div>
 
         <Rating rating={ rating } />
-        <Title title={ title } />
+        <Title title={ title } link={ currentLink }/>
         <Type type={ type } />
       </div>
     </article>
