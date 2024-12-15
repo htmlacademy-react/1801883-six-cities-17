@@ -22,6 +22,15 @@ type Offer = {
   rating: number;
 }
 
+type FullOffer = Omit<Offer, 'previewImage'> & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: UserShort;
+  images: string[];
+  maxAdults: number;
+}
+
 type User = {
   name: string;
   avatarUrl: string;
@@ -30,6 +39,16 @@ type User = {
   token: string;
 }
 
+type UserShort = Omit<User, 'email' | 'token'>;
+
+type Comment = {
+  id: string;
+  date: string;
+  user: UserShort;
+  comment: string;
+  rating: number;
+}
+
 type Page = keyof typeof AppRoute;
 
-export type { Offer, Location, User, Page };
+export type { Offer, FullOffer, Location, User, Comment, Page };

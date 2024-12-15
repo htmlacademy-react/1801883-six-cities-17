@@ -1,6 +1,7 @@
 import { generateOffers } from './mock-offers';
 import { getFavorites } from './mock-favorites';
-import { Offer, User } from '../types';
+import { generateFullOffer } from './mock-full-offer';
+import { Offer, FullOffer, User } from '../types';
 
 
 export default class MockData {
@@ -25,4 +26,9 @@ export default class MockData {
   get user() {
     return this.#user;
   }
+
+  getFullOffer = (id: string): FullOffer | null => {
+    const fullOffer = this.#offers.find((offer) => offer.id === id);
+    return fullOffer ? generateFullOffer(fullOffer) : null;
+  };
 }
