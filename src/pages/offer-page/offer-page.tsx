@@ -1,12 +1,20 @@
-import { Offer } from '../../types';
+import { Offer, FullOffer } from '../../types';
+import { useParams } from 'react-router-dom';
 import OfferCardsList from '../../components/offer-cards-list/offer-cards-list';
 
 type OfferPageProps = {
   nearOffers: Offer[];
+  getFullOffer: (id: string) => FullOffer | null;
 }
 
 
-export default function OfferPage({nearOffers}: OfferPageProps): JSX.Element {
+export default function OfferPage({nearOffers, getFullOffer}: OfferPageProps): JSX.Element {
+  const offerId = useParams().id;
+  const displayedOffer = offerId ? getFullOffer(offerId) : null;
+  /* eslint-disable no-console */
+  console.log('id: ', offerId);
+  console.log('Full offer: ', displayedOffer);
+
   return (
     <main className="page__main page__main--offer">
       <section className="offer">

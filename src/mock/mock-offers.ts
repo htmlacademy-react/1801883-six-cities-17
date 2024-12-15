@@ -12,7 +12,7 @@ const TITLES = [
 ] as const;
 const ImageRange = { Min: 1, Max: 20 } as const;
 const LocationRange = { Min: 0, Max: 60, Zoom: { Min: 0, Max: 16 } } as const;
-const OFFERS_NUMBER = 5;
+const OFFERS_NUMBER = 20;
 
 
 const generateLocation = (): Location => (

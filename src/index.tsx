@@ -15,6 +15,7 @@ root.render(
       offers={ mockData.offers }
       favoriteOffers={ mockData.favorites }
       user={ mockData.user }
+      getFullOffer={ mockData.getFullOffer }
     />
   </React.StrictMode>
 );

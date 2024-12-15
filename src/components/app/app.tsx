@@ -1,5 +1,5 @@
 import { AppRoute, AuthorizationStatus } from '../../consts';
-import { Offer, User } from '../../types';
+import { Offer, FullOffer, User } from '../../types';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import PrivateRoute from '../private-route/private-route';
@@ -14,10 +14,11 @@ type AppProps = {
   offers: Offer[];
   favoriteOffers?: Offer[];
   user?: User;
+  getFullOffer: (id: string) => FullOffer | null;
 }
 
 
-export default function App ({offers, favoriteOffers, user}: AppProps): JSX.Element {
+export default function App ({offers, favoriteOffers, user, getFullOffer}: AppProps): JSX.Element {
   const authorizationStatus = user ? AuthorizationStatus.Auth : AuthorizationStatus.NoAuth;
 
   return (
@@ -35,7 +36,12 @@ export default function App ({offers, favoriteOffers, user}: AppProps): JSX.Elem
             />
             <Route
               path={ AppRoute.Offer.Path }
-              element={ <OfferPage nearOffers={ offers } /> }
+              element={
+                <OfferPage
+                  nearOffers={ offers }
+                  getFullOffer={ getFullOffer }
+                />
+              }
             />
             <Route
               path={ AppRoute.Favorites.Path }
