@@ -1,5 +1,7 @@
 import { CITIES, OFFER_TYPES, AppRoute } from './consts';
 
+type Cities = typeof CITIES[number];
+
 type Location = {
   latitude: number;
   longitude: number;
@@ -13,7 +15,7 @@ type Offer = {
   price: number;
   previewImage: string;
   city: {
-    name: typeof CITIES[number];
+    name: Cities;
     location: Location;
   };
   location: Location;
@@ -51,4 +53,4 @@ type Comment = {
 
 type Page = keyof typeof AppRoute;
 
-export type { Offer, FullOffer, Location, User, Comment, Page };
+export type { Offer, FullOffer, Cities, Location, User, Comment, Page };
