@@ -1,12 +1,14 @@
 import { Offer } from '../../types';
+import { sortOffersByCity } from '../../utils';
 
 type FavoritesPageProps = {
-  favoriteOffers?: Offer[];
+  favoriteOffers: Offer[];
 }
 
 
 export default function FavoritesPage({favoriteOffers}: FavoritesPageProps): JSX.Element {
-  const temp = favoriteOffers; temp?.pop();
+  const sortedFavoritesByCity = sortOffersByCity(favoriteOffers);
+
   return (
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">
