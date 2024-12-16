@@ -13,6 +13,7 @@ import Type from './components/type';
 type OfferCardProps = {
   offer: Offer;
   cardType: keyof typeof CardClass;
+  handleOfferMouseOver?: (id: string | null) => void;
 }
 
 const CardClass = {
@@ -31,15 +32,19 @@ const CardClass = {
 } as const;
 
 
-export default function OfferCard({offer, cardType}: OfferCardProps): JSX.Element {
+export default function OfferCard({offer, cardType, handleOfferMouseOver}: OfferCardProps): JSX.Element {
   const {id, title, type, price, isFavorite, isPremium, rating, previewImage} = offer;
   const currentLink = {
     path: AppRoute.Offer.Path.replace(':id', id),
     title: AppRoute.Offer.TitleLink
   };
+  const cardHandlers = (cardType === 'Main' && handleOfferMouseOver) && {
+    onMouseEnter: () => handleOfferMouseOver(id),
+    onMouseLeave: () => handleOfferMouseOver(null)
+  };
 
   return (
-    <article className={classNames('place-card', CardClass[cardType].Article)}>
+    <article className={classNames('place-card', CardClass[cardType].Article)} {...cardHandlers}>
       {isPremium && <Premium />}
 
       <div className={classNames('place-card__image-wrapper', CardClass[cardType].DivImage)}>

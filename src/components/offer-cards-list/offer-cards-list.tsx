@@ -1,5 +1,6 @@
 import { Offer, Cities } from '../../types';
 import classNames from 'classnames';
+import { useState } from 'react';
 import MainListInfo from './components/main-list-info';
 import OfferCard from '../offer-card/offer-card';
 
@@ -25,6 +26,7 @@ const ListClassName = {
 
 
 export default function OfferCardsList({offers, currentCity, listType = 'Main'}: OfferCardsListProps): JSX.Element {
+  const [, setSelectedOffer] = useState<string | null>(null);
   const isEmptyList = offers.length === 0;
   const sectionClass = classNames({
     [ListClassName.Main.Section.FilledList]: listType === 'Main' && !isEmptyList,
@@ -40,7 +42,7 @@ export default function OfferCardsList({offers, currentCity, listType = 'Main'}:
       {isEmptyList || (
         <div className={ classNames('places__list', ListClassName[listType].Div) }>
 
-          {offers.map((offer: Offer) => <OfferCard key={ offer.id } offer={ offer } cardType={ listType } />)}
+          {offers.map((offer: Offer) => <OfferCard key={ offer.id } offer={ offer } cardType={ listType } handleOfferMouseOver={ setSelectedOffer }/>)}
 
         </div>
       )}
