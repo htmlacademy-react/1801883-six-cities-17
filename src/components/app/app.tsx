@@ -1,7 +1,8 @@
-import { AppRoute, AuthorizationStatus } from '../../consts';
-import { Offer, FullOffer, User } from '../../types';
+import { CITIES, AppRoute, AuthorizationStatus } from '../../consts';
+import { Offer, FullOffer, Cities, User } from '../../types';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { useState } from 'react';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../../pages/layout/layout';
 import MainPage from '../../pages/main-page/main-page';
@@ -19,6 +20,7 @@ type AppProps = {
 
 
 export default function App ({offers, favoriteOffers, user, getFullOffer}: AppProps): JSX.Element {
+  const [currentCity, setCurrentCity] = useState<Cities>(CITIES[0]);
   const authorizationStatus = user ? AuthorizationStatus.Auth : AuthorizationStatus.NoAuth;
 
   return (
@@ -28,7 +30,7 @@ export default function App ({offers, favoriteOffers, user, getFullOffer}: AppPr
           <Route path={ AppRoute.Main.Path } element={ <Layout favoriteCount ={ favoriteOffers ? favoriteOffers.length : 0 } user={ user } /> }>
             <Route
               index
-              element={ <MainPage offers={ offers } /> }
+              element={ <MainPage offers={ offers } currentCity={ currentCity } handleTabCLick={ setCurrentCity }/> }
             />
             <Route
               path={ AppRoute.Login.Path }
