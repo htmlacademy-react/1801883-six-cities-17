@@ -3,7 +3,6 @@ import { Offer, Cities, Page } from './types';
 
 
 const generateRandomNumber = (min: number = 0, max: number = 1000, isInteger: boolean = true): number => {
-
   let processedMin: number = Math.min(min, max);
   let processedMax: number = Math.max(min, max);
 
@@ -17,6 +16,8 @@ const generateRandomNumber = (min: number = 0, max: number = 1000, isInteger: bo
 };
 
 const capitalizeFirstLetter = (inputWord: string): string => inputWord[0].toUpperCase() + inputWord.slice(1);
+
+const checkPluralRule = (itemsNumber: number, itemsName: string): string => `${itemsNumber} ${itemsName}${itemsNumber > 1 ? 's' : ''}`;
 
 const getPageName = (path: string): Page => {
   const processedPath = path.replace(/\/offer\/[^/]+/, '/offer/:id');
@@ -41,4 +42,4 @@ const sortOffersByCity = (offers: Offer[]) =>
   );
 
 
-export { generateRandomNumber, capitalizeFirstLetter, getPageName, sortOffersByCity };
+export { generateRandomNumber, capitalizeFirstLetter, checkPluralRule, getPageName, sortOffersByCity };

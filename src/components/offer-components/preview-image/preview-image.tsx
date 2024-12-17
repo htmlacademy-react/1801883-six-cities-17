@@ -4,14 +4,8 @@ type PreviewImageProps = {
 }
 
 const Size = {
-  Default: {
-    width: 260,
-    height: 200
-  },
-  Small: {
-    width: 150,
-    height: 110
-  }
+  Default: {width: 260, height: 200},
+  Small: {width: 150, height: 110}
 } as const;
 
 
