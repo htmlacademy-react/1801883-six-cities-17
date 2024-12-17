@@ -1,4 +1,5 @@
-import { generateRandomNumber, flipCoin, getRandomElement, getUniqRandomElement } from './utils';
+import { flipCoin, getRandomElement, getUniqRandomElement } from './utils';
+import { generateRandomNumber } from '../utils';
 import { Offer, FullOffer } from '../types';
 
 const DESCRIPTION = [

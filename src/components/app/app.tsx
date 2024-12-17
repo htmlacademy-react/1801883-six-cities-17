@@ -36,7 +36,7 @@ export default function App ({offers, favoriteOffers, user, getFullOffer}: AppPr
             />
             <Route
               path={ AppRoute.Login.Path }
-              element={ <LoginPage /> }
+              element={ <LoginPage handleTabCLick={ setCurrentCity }/> }
             />
             <Route
               path={ AppRoute.Offer.Path }

@@ -1,4 +1,5 @@
-import { generateRandomNumber, flipCoin, getRandomElement } from './utils';
+import { flipCoin, getRandomElement } from './utils';
+import { generateRandomNumber } from '../utils';
 import { CITIES, OFFER_TYPES, RatingRange } from '../consts';
 import { Offer, Location } from '../types';
 
