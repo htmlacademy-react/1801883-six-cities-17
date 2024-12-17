@@ -1,4 +1,14 @@
-export default function LoginPage(): JSX.Element {
+import { CITIES } from '../../consts';
+import { Cities } from '../../types';
+import { generateRandomNumber } from '../../utils';
+import TabItem from '../../components/tab-item/tab-item';
+
+type LoginPageProps = {
+  handleTabCLick: (city: Cities) => void;
+}
+
+
+export default function LoginPage({handleTabCLick}: LoginPageProps): JSX.Element {
   return (
     <main className="page__main page__main--login">
       <div className="page__login-container container">
@@ -33,11 +43,7 @@ export default function LoginPage(): JSX.Element {
         </section>
 
         <section className="locations locations--login locations--current">
-          <div className="locations__item">
-            <a className="locations__item-link" href="#">
-              <span>Amsterdam</span>
-            </a>
-          </div>
+          <TabItem city={ CITIES[generateRandomNumber(0, CITIES.length - 1)] } handleTabCLick={ handleTabCLick } />
         </section>
 
       </div>
