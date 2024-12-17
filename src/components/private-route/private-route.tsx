@@ -1,9 +1,10 @@
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../consts';
+import { Authorization } from '../../types';
 import { PropsWithChildren } from 'react';
 
 type PrivateRouteProps = PropsWithChildren<{
-  authorizationStatus: typeof AuthorizationStatus[keyof typeof AuthorizationStatus];
+  authorizationStatus: Authorization;
   redirectRoute: typeof AppRoute[keyof typeof AppRoute]['Path'];
 }>
 

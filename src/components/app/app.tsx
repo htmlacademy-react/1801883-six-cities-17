@@ -1,5 +1,5 @@
 import { CITIES, AppRoute, AuthorizationStatus } from '../../consts';
-import { Offer, FullOffer, Cities, User } from '../../types';
+import { Offer, FullOffer, Cities, User, Comment } from '../../types';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState } from 'react';
@@ -17,10 +17,11 @@ type AppProps = {
   favoriteOffers: Offer[];
   user?: User;
   getFullOffer: (id: string) => FullOffer | null;
+  getComments: () => Comment[];
 }
 
 
-export default function App ({offers, favoriteOffers, user, getFullOffer}: AppProps): JSX.Element {
+export default function App ({offers, favoriteOffers, user, getFullOffer, getComments}: AppProps): JSX.Element {
   const [currentCity, setCurrentCity] = useState<Cities>(CITIES[0]);
   const sortedOffersByCity = sortOffersByCity(offers);
   const authorizationStatus = user ? AuthorizationStatus.Auth : AuthorizationStatus.NoAuth;
@@ -43,7 +44,9 @@ export default function App ({offers, favoriteOffers, user, getFullOffer}: AppPr
               element={
                 <OfferPage
                   nearOffers={ offers }
+                  authorizationStatus={ authorizationStatus }
                   getFullOffer={ getFullOffer }
+                  getComments={ getComments }
                 />
               }
             />

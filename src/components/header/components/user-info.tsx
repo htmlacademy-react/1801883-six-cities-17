@@ -17,7 +17,7 @@ export default function UserInfo({isLogged = false, email, favoriteCount}: UserI
       <ul className="header__nav-list">
         <li className="header__nav-item user">
           <Link to={ linkRoute.Path } title={ linkRoute.Title } className="header__nav-link header__nav-link--profile">
-            <Avatar />
+            <Avatar type='Header'/>
 
             {isLogged
               ?

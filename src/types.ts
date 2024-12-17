@@ -1,4 +1,4 @@
-import { CITIES, OFFER_TYPES, AppRoute } from './consts';
+import { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus } from './consts';
 
 type Cities = typeof CITIES[number];
 
@@ -53,4 +53,6 @@ type Comment = {
 
 type Page = keyof typeof AppRoute;
 
-export type { Offer, FullOffer, Cities, Location, User, Comment, Page };
+type Authorization = typeof AuthorizationStatus[keyof typeof AuthorizationStatus];
+
+export type { Offer, FullOffer, Cities, Location, User, Comment, Page, Authorization };
