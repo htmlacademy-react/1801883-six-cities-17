@@ -2,13 +2,13 @@ import { Offer } from '../../types';
 import { AppRoute } from '../../consts';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import Premium from './components/premium';
-import PreviewImage from './components/preview-image';
-import Price from './components/price';
-import BookmarkButton from '../bookmark-button/bookmark-button';
-import Rating from '../rating/rating';
-import Title from './components/title';
-import Type from './components/type';
+import Premium from '../offer-components/premium/premium';
+import PreviewImage from '../offer-components/preview-image/preview-image';
+import Price from '../offer-components/price/price';
+import BookmarkButton from '../offer-components/bookmark-button/bookmark-button';
+import Rating from '../offer-components/rating/rating';
+import Title from '../offer-components/title/title';
+import Type from '../offer-components/type/type';
 
 type OfferCardProps = {
   offer: Offer;
