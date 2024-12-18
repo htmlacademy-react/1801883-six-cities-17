@@ -19,13 +19,20 @@ type OfferPageProps = {
   getComments: () => Comment[];
 }
 
+const MAX_NEAR_OFFERS_NUMBER = 3;
+
 
 export default function OfferPage({nearOffers, authorizationStatus, getFullOffer, getComments}: OfferPageProps): JSX.Element {
   const offerId = useParams().id;
   const displayedOffer = offerId ? getFullOffer(offerId) : null;
+  const offers = [...nearOffers];
+  if (offers.length > MAX_NEAR_OFFERS_NUMBER) {
+    offers.splice(MAX_NEAR_OFFERS_NUMBER);
+  }
 
   if(displayedOffer) {
     const {title, type, price, isFavorite, isPremium, rating, bedrooms, goods, images, maxAdults} = displayedOffer;
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
 
     return (
       <main className="page__main page__main--offer">
@@ -63,11 +70,11 @@ export default function OfferPage({nearOffers, authorizationStatus, getFullOffer
             </div>
           </div>
 
-          <Map offers={ nearOffers } isOfferPage />
+          <Map offers={ offers } isOfferPage />
         </section>
 
         <div className="container">
-          <OfferCardsList offers={ nearOffers } currentCity={ displayedOffer.city.name } listType={ 'Near' } />
+          <OfferCardsList offers={ offers } currentCity={ displayedOffer.city.name } listType={ 'Near' } />
         </div>
       </main>
     );
