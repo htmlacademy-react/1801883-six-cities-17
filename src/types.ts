@@ -1,4 +1,6 @@
-import { CITIES, OFFER_TYPES, AppRoute } from './consts';
+import { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus } from './consts';
+
+type Cities = typeof CITIES[number];
 
 type Location = {
   latitude: number;
@@ -13,13 +15,22 @@ type Offer = {
   price: number;
   previewImage: string;
   city: {
-    name: typeof CITIES[number];
+    name: Cities;
     location: Location;
   };
   location: Location;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
+}
+
+type FullOffer = Omit<Offer, 'previewImage'> & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: UserShort;
+  images: string[];
+  maxAdults: number;
 }
 
 type User = {
@@ -30,6 +41,18 @@ type User = {
   token: string;
 }
 
+type UserShort = Omit<User, 'email' | 'token'>;
+
+type Comment = {
+  id: string;
+  date: string;
+  user: UserShort;
+  comment: string;
+  rating: number;
+}
+
 type Page = keyof typeof AppRoute;
 
-export type { Offer, Location, User, Page };
+type Authorization = typeof AuthorizationStatus[keyof typeof AuthorizationStatus];
+
+export type { Offer, FullOffer, Cities, Location, User, Comment, Page, Authorization };

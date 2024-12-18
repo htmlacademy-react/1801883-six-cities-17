@@ -9,7 +9,7 @@ import Logo from '../../components/logo/logo';
 
 type LayoutProps = {
   favoriteCount: number;
-  user: User | null;
+  user?: User;
 }
 
 

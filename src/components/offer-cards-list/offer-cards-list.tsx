@@ -1,46 +1,51 @@
-import { Offer } from '../../types';
-import SortingForm from '../sorting-form/sorting-form';
+import { Offer, Cities } from '../../types';
+import classNames from 'classnames';
+import { useState } from 'react';
+import MainListInfo from './components/main-list-info';
 import OfferCard from '../offer-card/offer-card';
 
 type OfferCardsListProps = {
   offers: Offer[];
+  currentCity: Cities;
   listType?: keyof typeof ListClassName;
 };
 
 const ListClassName = {
+  Main: {
+    Section: {
+      FilledList: 'cities__places places',
+      EmptyList: 'cities__no-places'
+    },
+    Div: 'cities__places-list tabs__content'
+  },
   Near: {
     Section: 'near-places places',
     Div: 'near-places__list'
-  },
-  Default: {
-    Section: 'cities__places places',
-    Div: 'cities__places-list tabs__content'
   }
 } as const;
 
 
-export default function OfferCardsList({offers, listType = 'Default'}: OfferCardsListProps): JSX.Element {
-  return (
-    <section className={ ListClassName[listType].Section }>
-      {listType === 'Near'
-        ? (<h2 className="near-places__title">Other places in the neighbourhood</h2>)
-        : (
-          <>
-            <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in {'Paris'}</b>
-            <SortingForm />
-          </>
-        )}
+export default function OfferCardsList({offers, currentCity, listType = 'Main'}: OfferCardsListProps): JSX.Element {
+  const [, setSelectedOffer] = useState<string | null>(null);
+  const isEmptyList = offers.length === 0;
+  const sectionClass = classNames({
+    [ListClassName.Main.Section.FilledList]: listType === 'Main' && !isEmptyList,
+    [ListClassName.Main.Section.EmptyList]: listType === 'Main' && isEmptyList,
+    [ListClassName.Near.Section]: listType === 'Near'
+  });
 
-      <div className={`${ListClassName[listType].Div} places__list` }>
-        {offers.map((offer: Offer) => (
-          <OfferCard
-            key={ offer.id }
-            offer={ offer }
-            cardType={ listType }
-          />
-        ))}
-      </div>
+  return (
+    <section className={ sectionClass }>
+      {listType === 'Near' && <h2 className="near-places__title">Other places in the neighbourhood</h2>}
+      {listType === 'Main' && <MainListInfo offersNumber={ offers.length } currentCity={ currentCity } />}
+
+      {isEmptyList || (
+        <div className={ classNames('places__list', ListClassName[listType].Div) }>
+
+          {offers.map((offer: Offer) => <OfferCard key={ offer.id } offer={ offer } cardType={ listType } handleOfferMouseOver={ setSelectedOffer }/>)}
+
+        </div>
+      )}
     </section>
   );
 }

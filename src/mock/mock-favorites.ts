@@ -1,4 +1,5 @@
-import { generateRandomNumber, getUniqRandomElement } from './utils';
+import { getUniqRandomElement } from './utils';
+import { generateRandomNumber } from '../utils';
 import { Offer } from '../types';
 
 const MIN_NUMBER = 0;
