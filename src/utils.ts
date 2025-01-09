@@ -12,7 +12,7 @@ const generateRandomNumber = (min: number = 0, max: number = 1000, isInteger: bo
     return Math.floor(Math.random() * (processedMax - processedMin + 1) + processedMin);
   }
 
-  return Math.round((Math.random() * (processedMax - processedMin) + processedMin) * 10) / 10;
+  return Math.round((Math.random() * (processedMax - processedMin) + processedMin) * 1000) / 1000;
 };
 
 const capitalizeFirstLetter = (inputWord: string): string => inputWord[0].toUpperCase() + inputWord.slice(1);

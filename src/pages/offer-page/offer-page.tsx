@@ -30,6 +30,7 @@ export default function OfferPage({nearOffers, authorizationStatus, getFullOffer
   if (offers.length > MAX_NEAR_OFFERS_NUMBER) {
     offers.splice(MAX_NEAR_OFFERS_NUMBER);
   }
+
   useEffect(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, [offerId]);
