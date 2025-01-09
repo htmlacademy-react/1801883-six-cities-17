@@ -1,5 +1,6 @@
 import { Offer, FullOffer, Comment, Authorization } from '../../types';
 import { capitalizeFirstLetter, checkPluralRule } from '../../utils';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
 import Gallery from '../../components/offer-components/gallery/gallery';
@@ -29,10 +30,12 @@ export default function OfferPage({nearOffers, authorizationStatus, getFullOffer
   if (offers.length > MAX_NEAR_OFFERS_NUMBER) {
     offers.splice(MAX_NEAR_OFFERS_NUMBER);
   }
+  useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, [offerId]);
 
   if(displayedOffer) {
     const {title, type, price, isFavorite, isPremium, rating, bedrooms, goods, images, maxAdults} = displayedOffer;
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
 
     return (
       <main className="page__main page__main--offer">
