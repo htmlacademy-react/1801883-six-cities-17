@@ -35,6 +35,7 @@ export default function OfferPage({nearOffers, authorizationStatus, getFullOffer
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, [offerId]);
 
+
   if(displayedOffer) {
     const {title, type, price, isFavorite, isPremium, rating, bedrooms, goods, images, maxAdults} = displayedOffer;
 
@@ -74,7 +75,7 @@ export default function OfferPage({nearOffers, authorizationStatus, getFullOffer
             </div>
           </div>
 
-          <Map offers={ offers } isOfferPage />
+          <Map offers={ offers } selectedOffer={ displayedOffer.id } isOfferPage />
         </section>
 
         <div className="container">

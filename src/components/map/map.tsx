@@ -1,19 +1,15 @@
 import { Offer } from '../../types';
+import classNames from 'classnames';
 
 type MapProps = {
   offers: Offer[];
+  selectedOffer: string | null;
   isOfferPage?: boolean;
 }
 
 
-export default function Map({offers, isOfferPage = false}: MapProps): JSX.Element {
+export default function Map({offers, selectedOffer, isOfferPage = false}: MapProps): JSX.Element {
   return (
-    isOfferPage
-      ? <section className="offer__map map"></section>
-      : (
-        <div className="cities__right-section">
-          {offers.length > 0 && <section className="cities__map map"></section>}
-        </div>
-      )
+    <section className={classNames('map', {'offer__map': isOfferPage, 'cities__map': !isOfferPage})}></section>
   );
 }

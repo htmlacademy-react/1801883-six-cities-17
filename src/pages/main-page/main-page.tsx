@@ -1,4 +1,5 @@
 import { Offer, Cities } from '../../types';
+import { useState } from 'react';
 import classNames from 'classnames';
 import TabsList from '../../components/tabs-list/tabs-list';
 import OfferCardsList from '../../components/offer-cards-list/offer-cards-list';
@@ -12,6 +13,7 @@ type MainPageProps = {
 
 
 export default function MainPage({offers, currentCity, handleTabCLick}: MainPageProps): JSX.Element {
+  const [selectedOffer, setSelectedOffer] = useState<string | null>(null);
   const isEmptyList = offers.length === 0;
 
   return (
@@ -21,8 +23,10 @@ export default function MainPage({offers, currentCity, handleTabCLick}: MainPage
 
       <div className="cities">
         <div className={classNames('cities__places-container container', {'cities__places-container--empty': isEmptyList})}>
-          <OfferCardsList offers={ offers } currentCity={ currentCity } />
-          <Map offers={ offers }/>
+          <OfferCardsList offers={ offers } currentCity={ currentCity } handleOfferMouseOver={ setSelectedOffer }/>
+          <div className="cities__right-section">
+            {isEmptyList || <Map offers={ offers } selectedOffer={ selectedOffer } />}
+          </div>
         </div>
       </div>
     </main>
