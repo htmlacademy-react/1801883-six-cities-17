@@ -21,7 +21,7 @@ const TITLES = [
   'Canal View Prinsengracht',
 ] as const;
 const ImageRange = { Min: 1, Max: 20 } as const;
-const LocationRange = { Min: 0.2, Max: 0.2, Zoom: 16 } as const;
+const LocationRange = { Min: 0.04, Max: 0.04, Zoom: 16 } as const;
 const OFFERS_NUMBER = 20;
 
 

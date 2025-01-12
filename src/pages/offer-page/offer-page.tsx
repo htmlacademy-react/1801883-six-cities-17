@@ -75,7 +75,7 @@ export default function OfferPage({nearOffers, authorizationStatus, getFullOffer
             </div>
           </div>
 
-          <Map offers={ offers } selectedOffer={ displayedOffer.id } isOfferPage />
+          <Map offers={ offers } selectedOffer={ displayedOffer } isOfferPage />
         </section>
 
         <div className="container">

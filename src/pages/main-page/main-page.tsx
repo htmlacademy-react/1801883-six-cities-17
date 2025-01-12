@@ -13,7 +13,7 @@ type MainPageProps = {
 
 
 export default function MainPage({offers, currentCity, handleTabCLick}: MainPageProps): JSX.Element {
-  const [selectedOffer, setSelectedOffer] = useState<string | null>(null);
+  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
   const isEmptyList = offers.length === 0;
 
   return (

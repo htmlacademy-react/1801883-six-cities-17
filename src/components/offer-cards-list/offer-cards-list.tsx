@@ -7,7 +7,7 @@ type OfferCardsListProps = {
   offers: Offer[];
   currentCity: Cities;
   listType?: keyof typeof ListClassName;
-  handleOfferMouseOver?: (id: string | null) => void;
+  handleOfferMouseOver?: (id: Offer | null) => void;
 };
 
 const ListClassName = {
