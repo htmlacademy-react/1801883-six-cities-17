@@ -13,7 +13,7 @@ import Type from '../offer-components/type/type';
 type OfferCardProps = {
   offer: Offer;
   cardType: keyof typeof CardClass;
-  handleOfferMouseOver?: (id: string | null) => void;
+  handleOfferMouseOver?: (id: Offer | null) => void;
 }
 
 const CardClass = {
@@ -39,7 +39,7 @@ export default function OfferCard({offer, cardType, handleOfferMouseOver}: Offer
     title: AppRoute.Offer.TitleLink
   };
   const cardHandlers = (cardType === 'Main' && handleOfferMouseOver) && {
-    onMouseEnter: () => handleOfferMouseOver(id),
+    onMouseEnter: () => handleOfferMouseOver(offer),
     onMouseLeave: () => handleOfferMouseOver(null)
   };
 

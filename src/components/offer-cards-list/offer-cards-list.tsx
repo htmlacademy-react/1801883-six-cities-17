@@ -1,6 +1,5 @@
 import { Offer, Cities } from '../../types';
 import classNames from 'classnames';
-import { useState } from 'react';
 import MainListInfo from './components/main-list-info';
 import OfferCard from '../offer-card/offer-card';
 
@@ -8,6 +7,7 @@ type OfferCardsListProps = {
   offers: Offer[];
   currentCity: Cities;
   listType?: keyof typeof ListClassName;
+  handleOfferMouseOver?: (id: Offer | null) => void;
 };
 
 const ListClassName = {
@@ -25,8 +25,7 @@ const ListClassName = {
 } as const;
 
 
-export default function OfferCardsList({offers, currentCity, listType = 'Main'}: OfferCardsListProps): JSX.Element {
-  const [, setSelectedOffer] = useState<string | null>(null);
+export default function OfferCardsList({offers, currentCity, listType = 'Main', handleOfferMouseOver}: OfferCardsListProps): JSX.Element {
   const isEmptyList = offers.length === 0;
   const sectionClass = classNames({
     [ListClassName.Main.Section.FilledList]: listType === 'Main' && !isEmptyList,
@@ -42,7 +41,7 @@ export default function OfferCardsList({offers, currentCity, listType = 'Main'}:
       {isEmptyList || (
         <div className={ classNames('places__list', ListClassName[listType].Div) }>
 
-          {offers.map((offer: Offer) => <OfferCard key={ offer.id } offer={ offer } cardType={ listType } handleOfferMouseOver={ setSelectedOffer }/>)}
+          {offers.map((offer: Offer) => <OfferCard key={ offer.id } offer={ offer } cardType={ listType } handleOfferMouseOver={ handleOfferMouseOver }/>)}
 
         </div>
       )}
