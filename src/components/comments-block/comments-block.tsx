@@ -9,18 +9,19 @@ type CommentsBlockProps = {
 
 const MAX_COMMENTS_NUMBER = 10;
 
+const sortComments = (commentA: Comment, commentB: Comment) => new Date(commentB.date).getTime() - new Date(commentA.date).getTime();
+
 
 export default function CommentsBlock({authorizationStatus, getComments}: CommentsBlockProps): JSX.Element {
   const comments = getComments();
+  const commentsNumber = comments.length;
 
-  if (comments.length > MAX_COMMENTS_NUMBER) {
-    comments.splice(MAX_COMMENTS_NUMBER);
-  }
+  comments.splice(MAX_COMMENTS_NUMBER).sort(sortComments);
 
   return (
     <section className="offer__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
-      {comments.length > 0 && (
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{commentsNumber}</span></h2>
+      {commentsNumber > 0 && (
         <ul className="reviews__list">
           {comments.map((comment) => <CommentItem key={ comment.id } userComment={ comment } />)}
         </ul>
