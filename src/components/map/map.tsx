@@ -1,5 +1,5 @@
 import { Offer, FullOffer } from '../../types';
-import useMap from './hooks/use-map';
+import useMap from '../../hooks/use-map';
 import { useEffect } from 'react';
 import Leaflet from 'leaflet';
 import { useRef } from 'react';
