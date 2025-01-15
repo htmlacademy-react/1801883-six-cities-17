@@ -55,4 +55,9 @@ type Page = keyof typeof AppRoute;
 
 type Authorization = typeof AuthorizationStatus[keyof typeof AuthorizationStatus];
 
-export type { Offer, FullOffer, Cities, Location, User, Comment, Page, Authorization };
+type AppState = {
+  currentCity: Cities;
+  offers: Offer[];
+}
+
+export type { Offer, FullOffer, Cities, Location, User, Comment, Page, Authorization, AppState };
