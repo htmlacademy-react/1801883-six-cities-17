@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, MutableRefObject } from 'react';
 import Leaflet, { Map } from 'leaflet';
-import { Location } from '../../../types';
+import { Location } from '../types';
 
 export const TileLayerConfig = {
   UrlTemplate: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
