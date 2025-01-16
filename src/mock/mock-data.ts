@@ -5,7 +5,7 @@ import { generateComments } from './mock-comments';
 import { Offer, FullOffer, User, Comment } from '../types';
 
 
-export default class MockData {
+class MockData {
   #offers: Offer[] = generateOffers();
   #favorites: Offer[] = getFavorites(this.#offers);
   #user: User = {
@@ -35,3 +35,5 @@ export default class MockData {
 
   getComments = (): Comment[] => generateComments();
 }
+
+export default new MockData();

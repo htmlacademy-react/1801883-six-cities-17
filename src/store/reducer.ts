@@ -2,11 +2,13 @@ import { AppState } from '../types';
 import { CITIES } from '../consts';
 import { changeCity, loadOffers } from './action';
 import { createReducer } from '@reduxjs/toolkit';
+import { sortOffersByCity } from '../utils';
 
 
 const initialState: AppState = {
+  loadedOffers: [],
+  offers: {Paris: [], Cologne: [], Brussels: [], Amsterdam: [], Hamburg: [], Dusseldorf: []},
   currentCity: CITIES[0],
-  offers: []
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -15,6 +17,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.currentCity = action.payload.city;
     })
     .addCase(loadOffers, (state, action) => {
-      state.offers = action.payload.loadedOffers;
+      state.loadedOffers = action.payload.loadedOffers;
+      state.offers = sortOffersByCity(state.loadedOffers);
     });
 });

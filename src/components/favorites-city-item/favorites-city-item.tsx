@@ -5,15 +5,14 @@ import OfferCard from '../offer-card/offer-card';
 type FavoritesListProps = {
   city: Cities;
   favoriteOffers: Offer[];
-  handleTabCLick: (city: Cities) => void;
 }
 
 
-export default function FavoritesCityItem({city, favoriteOffers, handleTabCLick}: FavoritesListProps): JSX.Element {
+export default function FavoritesCityItem({city, favoriteOffers}: FavoritesListProps): JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
-        <TabItem city={ city } handleTabCLick={ handleTabCLick }/>
+        <TabItem city={ city }/>
       </div>
 
       <div className="favorites__places">
