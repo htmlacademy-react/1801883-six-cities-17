@@ -1,10 +1,9 @@
-import { AppRoute, AuthorizationStatus } from '../../consts';
-import { Offer, FullOffer, User, Comment } from '../../types';
+import { AppRoute } from '../../consts';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { loadOffers } from '../../store/action';
+import { loadOffers, loadFavoriteOffers, loadUser, setAuthorizationStatus } from '../../store/action';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../../pages/layout/layout';
 import MainPage from '../../pages/main-page/main-page';
@@ -14,42 +13,29 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import ErrorPage from '../../pages/error-page/error-page';
 import mockData from '../../mock/mock-data';
 
-type AppProps = {
-  favoriteOffers: Offer[];
-  user?: User;
-  getFullOffer: (id: string) => FullOffer | null;
-  getComments: () => Comment[];
-}
 
-
-export default function App ({favoriteOffers, user, getFullOffer, getComments}: AppProps): JSX.Element {
+export default function App (): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(loadOffers({loadedOffers: mockData.offers}));
+    dispatch(loadFavoriteOffers({loadedFavoriteOffers: mockData.favorites}));
+    dispatch(loadUser({user: mockData.user}));
+    dispatch(setAuthorizationStatus({status: 'AUTH'}));
   }, [dispatch]);
 
-  const authorizationStatus = user ? AuthorizationStatus.Auth : AuthorizationStatus.NoAuth;
 
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={ AppRoute.Main.Path } element={ <Layout favoriteCount ={ favoriteOffers ? favoriteOffers.length : 0 } user={ user } /> }>
+          <Route path={ AppRoute.Main.Path } element={ <Layout/> }>
             <Route index element={ <MainPage /> }/>
             <Route path={ AppRoute.Login.Path } element={ <LoginPage/> }/>
-            <Route path={ AppRoute.Offer.Path }
-              element={
-                <OfferPage
-                  authorizationStatus={ authorizationStatus }
-                  getFullOffer={ getFullOffer }
-                  getComments={ getComments }
-                />
-              }
-            />
+            <Route path={ AppRoute.Offer.Path } element={ <OfferPage/> }/>
             <Route path={ AppRoute.Favorites.Path }
               element={
-                <PrivateRoute authorizationStatus={ authorizationStatus } redirectRoute={ AppRoute.Login.Path }>
-                  <FavoritesPage favoriteOffers={ favoriteOffers }/>
+                <PrivateRoute redirectRoute={ AppRoute.Login.Path }>
+                  <FavoritesPage/>
                 </PrivateRoute>
               }
             />
