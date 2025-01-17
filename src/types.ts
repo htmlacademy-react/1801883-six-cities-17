@@ -69,4 +69,4 @@ type AppState = {
   authorizationStatus: Authorization;
 }
 
-export type { Offer, FullOffer, Cities, Location, User, Comment, Page, Authorization, AppState };
+export type { Offer, FullOffer, Cities, Location, User, UserShort, Comment, Page, Authorization, AppState };
