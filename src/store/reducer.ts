@@ -1,6 +1,6 @@
 import { AppState } from '../types';
 import { CITIES } from '../consts';
-import { changeCity, loadOffers, loadFullOffer, loadFavoriteOffers, loadNearOffers, loadComments, loadUser, setAuthorizationStatus } from './action';
+import { changeCity, changeSortType, loadOffers, loadFullOffer, loadFavoriteOffers, loadNearOffers, loadComments, loadUser, setAuthorizationStatus } from './action';
 import { createReducer } from '@reduxjs/toolkit';
 import { sortOffersByCity, sortComments } from '../utils';
 import mockData from '../mock/mock-data';
@@ -10,6 +10,7 @@ const MAX_NEAR_OFFERS_NUMBER = 3;
 const initialState: AppState = {
   offers: {Paris: [], Cologne: [], Brussels: [], Amsterdam: [], Hamburg: [], Dusseldorf: []},
   currentCity: CITIES[0],
+  sortType: 'Popular',
   loadedOffers: [],
   loadedFullOffer: undefined,
   loadedFavoriteOffers: [],
@@ -24,6 +25,9 @@ export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
       state.currentCity = action.payload.city;
+    })
+    .addCase(changeSortType, (state, action) => {
+      state.sortType = action.payload.sortType;
     })
     .addCase(loadOffers, (state, action) => {
       state.loadedOffers = action.payload.loadedOffers;

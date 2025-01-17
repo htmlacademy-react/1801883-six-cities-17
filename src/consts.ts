@@ -37,7 +37,7 @@ const AuthorizationStatus = {
 
 const RatingRange = { Min: 0, Max: 5 } as const;
 
-const SortTypes = {
+const SortType = {
   Popular: {
     Name: 'Popular'
   },
@@ -52,4 +52,4 @@ const SortTypes = {
   }
 } as const;
 
-export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus, RatingRange, SortTypes };
+export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus, RatingRange, SortType };

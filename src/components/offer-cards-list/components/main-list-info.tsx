@@ -1,4 +1,5 @@
 import { Cities } from '../../../types';
+import { checkPluralRule } from '../../../utils';
 import SortingForm from '../../sorting-form/sorting-form';
 
 type MainListInfoProps = {
@@ -12,7 +13,7 @@ export default function MainListInfo({offersNumber, currentCity}: MainListInfoPr
     return (
       <>
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{offersNumber} places to stay in {currentCity}</b>
+        <b className="places__found">{checkPluralRule(offersNumber, 'place')} to stay in {currentCity}</b>
         <SortingForm />
       </>
     );
