@@ -6,13 +6,13 @@ export const changeCity = createAction<{city: Cities}>('app/changeCity');
 
 export const loadOffers = createAction<{loadedOffers: Offer[]}>('data/loadOffers');
 
-export const loadFullOffer = createAction<{id: string}>('data/loadFullOffer');
+export const loadFullOffer = createAction<{id: string | undefined}>('data/loadFullOffer');
 
 export const loadFavoriteOffers = createAction<{loadedFavoriteOffers: Offer[]}>('data/loadFavoriteOffers');
 
-export const loadNearOffers = createAction<{loadedNearOffers: Offer[]}>('data/loadNearOffers');
+export const loadNearOffers = createAction<{id: string | undefined}>('data/loadNearOffers');
 
-export const loadComments = createAction<{id: string}>('data/loadComments');
+export const loadComments = createAction<{id: string | undefined}>('data/loadComments');
 
 export const loadUser = createAction<{user: User}>('data/loadUser');
 

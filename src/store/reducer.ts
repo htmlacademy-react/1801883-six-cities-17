@@ -2,9 +2,10 @@ import { AppState } from '../types';
 import { CITIES } from '../consts';
 import { changeCity, loadOffers, loadFullOffer, loadFavoriteOffers, loadNearOffers, loadComments, loadUser, setAuthorizationStatus } from './action';
 import { createReducer } from '@reduxjs/toolkit';
-import { sortOffersByCity } from '../utils';
+import { sortOffersByCity, sortComments } from '../utils';
 import mockData from '../mock/mock-data';
 
+const MAX_NEAR_OFFERS_NUMBER = 3;
 
 const initialState: AppState = {
   offers: {Paris: [], Cologne: [], Brussels: [], Amsterdam: [], Hamburg: [], Dusseldorf: []},
@@ -17,6 +18,7 @@ const initialState: AppState = {
   user: undefined,
   authorizationStatus: 'UNKNOWN'
 };
+
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
@@ -33,11 +35,11 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(loadFavoriteOffers, (state, action) => {
       state.loadedFavoriteOffers = action.payload.loadedFavoriteOffers;
     })
-    .addCase(loadNearOffers, (state, action) => {
-      state.loadedNearOffers = action.payload.loadedNearOffers;
+    .addCase(loadNearOffers, (state) => {
+      state.loadedNearOffers = [...mockData.offers].slice(0, MAX_NEAR_OFFERS_NUMBER);
     })
     .addCase(loadComments, (state) => {
-      state.loadedComments = mockData.getComments();
+      state.loadedComments = mockData.getComments().sort(sortComments);
     })
     .addCase(loadUser, (state, action) => {
       state.user = action.payload.user;

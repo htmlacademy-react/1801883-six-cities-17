@@ -1,5 +1,5 @@
 import { CITIES, AppRoute } from './consts';
-import { Offer, Cities, Page } from './types';
+import { Offer, Cities, Comment, Page } from './types';
 
 
 const generateRandomNumber = (min: number = 0, max: number = 1000, isInteger: boolean = true): number => {
@@ -30,7 +30,7 @@ const getPageName = (path: string): Page => {
   return 'Main';
 };
 
-const sortOffersByCity = (offers: Offer[]) =>
+const sortOffersByCity = (offers: Offer[]) => (
   offers.reduce<Record<Cities, Offer[]>>(
     (groupedOffers, offer) => {
       const key = offer.city.name;
@@ -39,7 +39,9 @@ const sortOffersByCity = (offers: Offer[]) =>
       return { ...groupedOffers, [key]: group };
     },
     Object.fromEntries(CITIES.map((city) => [ city, [] as Offer[] ])) as Record<Cities, Offer[]>
-  );
+  )
+);
 
+const sortComments = (commentA: Comment, commentB: Comment) => new Date(commentB.date).getTime() - new Date(commentA.date).getTime();
 
-export { generateRandomNumber, capitalizeFirstLetter, checkPluralRule, getPageName, sortOffersByCity };
+export { generateRandomNumber, capitalizeFirstLetter, checkPluralRule, getPageName, sortOffersByCity, sortComments };

@@ -28,7 +28,7 @@ class MockData {
     return this.#user;
   }
 
-  getFullOffer = (id: string): FullOffer | undefined => {
+  getFullOffer = (id: string | undefined): FullOffer | undefined => {
     const fullOffer = this.#offers.find((offer) => offer.id === id);
     return fullOffer ? generateFullOffer(fullOffer) : undefined;
   };
