@@ -1,3 +1,4 @@
+import { SortType } from '../../consts';
 import { Offer } from '../../types';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks/use-app-selector';
@@ -8,7 +9,9 @@ import Map from '../../components/map/map';
 
 
 export default function MainPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers[state.currentCity]);
+  const sortType = useAppSelector((state) => state.sortType);
+  const offers = [...useAppSelector((state) => state.offers[state.currentCity])];
+  offers.sort(SortType[sortType].sortMethod);
   const currentCity = useAppSelector((state) => state.currentCity);
   const isEmptyList = offers.length === 0;
 
@@ -21,7 +24,7 @@ export default function MainPage(): JSX.Element {
 
       <div className="cities">
         <div className={classNames('cities__places-container container', {'cities__places-container--empty': isEmptyList})}>
-          <OfferCardsList offers={ offers } currentCity={ currentCity } handleOfferMouseOver={ setSelectedOffer }/>
+          <OfferCardsList offers={ offers } isEmptyList={ isEmptyList } currentCity={ currentCity } handleOfferMouseOver={ setSelectedOffer }/>
           <div className="cities__right-section">
             {isEmptyList || <Map offers={ offers } selectedOffer={ selectedOffer } />}
           </div>

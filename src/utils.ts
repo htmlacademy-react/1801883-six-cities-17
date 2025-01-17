@@ -44,4 +44,10 @@ const sortOffersByCity = (offers: Offer[]) => (
 
 const sortComments = (commentA: Comment, commentB: Comment) => new Date(commentB.date).getTime() - new Date(commentA.date).getTime();
 
-export { generateRandomNumber, capitalizeFirstLetter, checkPluralRule, getPageName, sortOffersByCity, sortComments };
+const sortByPriceLow = (offerA: Offer, offerB: Offer): number => offerA.price - offerB.price;
+
+const sortByPriceHigh = (offerA: Offer, offerB: Offer): number => offerB.price - offerA.price;
+
+const sortByRating = (offerA: Offer, offerB: Offer): number => offerB.rating - offerA.rating;
+
+export { generateRandomNumber, capitalizeFirstLetter, checkPluralRule, getPageName, sortOffersByCity, sortComments, sortByPriceLow, sortByPriceHigh, sortByRating };

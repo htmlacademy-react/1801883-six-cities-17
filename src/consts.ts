@@ -1,3 +1,5 @@
+import { sortByPriceLow, sortByPriceHigh, sortByRating } from './utils';
+
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
 
 const OFFER_TYPES = ['room', 'house', 'hotel', 'apartment'] as const;
@@ -39,16 +41,20 @@ const RatingRange = { Min: 0, Max: 5 } as const;
 
 const SortType = {
   Popular: {
-    Name: 'Popular'
+    Name: 'Popular',
+    sortMethod: () => 0,
   },
   PriceLow: {
-    Name: 'Price: low to high'
+    Name: 'Price: low to high',
+    sortMethod: sortByPriceLow,
   },
   PriceHigh: {
-    Name: 'Price: high to low'
+    Name: 'Price: high to low',
+    sortMethod: sortByPriceHigh,
   },
   Rated: {
-    Name: 'Top rated first'
+    Name: 'Top rated first',
+    sortMethod: sortByRating,
   }
 } as const;
 
