@@ -1,4 +1,4 @@
-import { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus } from './consts';
+import { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus, SortType } from './consts';
 import { sortOffersByCity } from './utils';
 
 type Cities = typeof CITIES[number];
@@ -54,12 +54,14 @@ type Comment = {
 
 type Page = keyof typeof AppRoute;
 
+type SortingType = keyof typeof SortType;
+
 type Authorization = typeof AuthorizationStatus[keyof typeof AuthorizationStatus];
 
 type AppState = {
   offers: ReturnType<typeof sortOffersByCity>;
   currentCity: Cities;
-  //sortingType: ;
+  sortType: SortingType;
   loadedOffers: Offer[];
   loadedFullOffer: FullOffer | undefined;
   loadedFavoriteOffers: Offer[];
@@ -69,4 +71,4 @@ type AppState = {
   authorizationStatus: Authorization;
 }
 
-export type { Offer, FullOffer, Cities, Location, User, UserShort, Comment, Page, Authorization, AppState };
+export type { Offer, FullOffer, Cities, Location, User, UserShort, Comment, Page, SortingType, Authorization, AppState };

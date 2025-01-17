@@ -1,8 +1,10 @@
-import { Cities, Offer, User, Authorization } from '../types';
+import { Cities, Offer, User, SortingType, Authorization } from '../types';
 import { createAction } from '@reduxjs/toolkit';
 
 
 export const changeCity = createAction<{city: Cities}>('app/changeCity');
+
+export const changeSortType = createAction<{sortType: SortingType}>('app/changeSortType');
 
 export const loadOffers = createAction<{loadedOffers: Offer[]}>('data/loadOffers');
 
