@@ -5,7 +5,7 @@ import { generateComments } from './mock-comments';
 import { Offer, FullOffer, User, Comment } from '../types';
 
 
-export default class MockData {
+class MockData {
   #offers: Offer[] = generateOffers();
   #favorites: Offer[] = getFavorites(this.#offers);
   #user: User = {
@@ -28,10 +28,12 @@ export default class MockData {
     return this.#user;
   }
 
-  getFullOffer = (id: string): FullOffer | null => {
+  getFullOffer = (id: string | undefined): FullOffer | undefined => {
     const fullOffer = this.#offers.find((offer) => offer.id === id);
-    return fullOffer ? generateFullOffer(fullOffer) : null;
+    return fullOffer ? generateFullOffer(fullOffer) : undefined;
   };
 
   getComments = (): Comment[] => generateComments();
 }
+
+export default new MockData();

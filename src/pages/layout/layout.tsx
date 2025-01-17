@@ -1,21 +1,20 @@
 import { AppRoute } from '../../consts';
-import { User } from '../../types';
 import { getPageName } from '../../utils';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { Helmet } from 'react-helmet-async';
 import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
 
-type LayoutProps = {
-  favoriteCount: number;
-  user?: User;
-}
 
-
-export default function Layout({favoriteCount, user}: LayoutProps): JSX.Element {
+export default function Layout(): JSX.Element {
   const currentPagePath = useLocation().pathname;
   const currentPageName = getPageName(currentPagePath);
+
+  const user = useAppSelector((state) => state.user);
+  const favoriteCount = useAppSelector((state) => state.loadedFavoriteOffers).length;
+
   const isAdditionalClass = currentPageName === 'Main' || currentPageName === 'Login' || currentPageName === 'Favorites' && favoriteCount === 0;
 
   const divClass = classNames('page', {

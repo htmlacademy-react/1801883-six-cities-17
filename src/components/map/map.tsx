@@ -1,8 +1,10 @@
 import { Offer, FullOffer } from '../../types';
+import { AppRoute } from '../../consts';
 import useMap from '../../hooks/use-map';
 import { useEffect } from 'react';
 import Leaflet from 'leaflet';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import 'leaflet/dist/leaflet.css';
 
@@ -32,6 +34,7 @@ export default function Map({offers, selectedOffer, isOfferPage = false}: MapPro
   const center = (isOfferPage && selectedOffer) ? selectedOffer.location : offers[0].city.location;
   const containerRef = useRef(null);
   const map = useMap(containerRef, center);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!map) {
@@ -61,13 +64,15 @@ export default function Map({offers, selectedOffer, isOfferPage = false}: MapPro
             : defaultCustomIcon
         );
 
-      marker.addTo(markerLayer);
+      marker
+        .addTo(markerLayer)
+        .on('click', () => navigate(AppRoute.Offer.Path.replace(':id', offer.id)));
     });
 
     return () => {
       map.removeLayer(markerLayer);
     };
-  }, [map, offers, selectedOffer, isOfferPage]);
+  }, [map, offers, selectedOffer, isOfferPage, navigate]);
 
 
   return (

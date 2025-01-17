@@ -1,16 +1,12 @@
 import { CITIES } from '../../consts';
-import { Offer, Cities } from '../../types';
 import { sortOffersByCity } from '../../utils';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import classNames from 'classnames';
 import FavoritesCityItem from '../../components/favorites-city-item/favorites-city-item';
 
-type FavoritesPageProps = {
-  favoriteOffers: Offer[];
-  handleTabCLick: (city: Cities) => void;
-}
 
-
-export default function FavoritesPage({favoriteOffers, handleTabCLick}: FavoritesPageProps): JSX.Element {
+export default function FavoritesPage(): JSX.Element {
+  const favoriteOffers = useAppSelector((state) => state.loadedFavoriteOffers);
   const isEmptyList = favoriteOffers.length === 0;
   const sortedFavoritesByCity = sortOffersByCity(favoriteOffers);
 
@@ -33,7 +29,7 @@ export default function FavoritesPage({favoriteOffers, handleTabCLick}: Favorite
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
                 {CITIES.map((city) => (sortedFavoritesByCity[city].length > 0) &&
-                  <FavoritesCityItem key={ city } city={ city } favoriteOffers={ sortedFavoritesByCity[city] } handleTabCLick={ handleTabCLick }/>
+                  <FavoritesCityItem key={ city } city={ city } favoriteOffers={ sortedFavoritesByCity[city] }/>
                 )}
               </ul>
             </>}
