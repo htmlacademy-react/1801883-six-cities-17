@@ -62,7 +62,7 @@ export default function OfferPage(): JSX.Element {
       </section>
 
       <div className="container">
-        <OfferCardsList offers={ nearOffers } currentCity={ displayedOffer.city.name } listType={ 'Near' } />
+        <OfferCardsList offers={ nearOffers } isEmptyList={ nearOffers.length === 0 } currentCity={ displayedOffer.city.name } listType={ 'Near' } />
       </div>
     </main>
   );
