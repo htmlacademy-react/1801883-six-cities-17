@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { loadOffers, loadFavoriteOffers, loadUser, setAuthorizationStatus } from '../../store/action';
+import { loadUser, setAuthorizationStatus } from '../../store/action';
+import { fetchOffers, fetchFavoriteOffers } from '../../store/api-actions';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../../pages/layout/layout';
 import MainPage from '../../pages/main-page/main-page';
@@ -17,10 +18,11 @@ import mockData from '../../mock/mock-data';
 export default function App (): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(loadOffers({loadedOffers: mockData.offers}));
-    dispatch(loadFavoriteOffers({loadedFavoriteOffers: mockData.favorites}));
     dispatch(loadUser({user: mockData.user}));
     dispatch(setAuthorizationStatus({status: 'AUTH'}));
+
+    dispatch(fetchOffers());
+    dispatch(fetchFavoriteOffers());
   }, [dispatch]);
 
 
