@@ -19,7 +19,7 @@ export default function App (): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(loadUser({user: mockData.user}));
-    dispatch(setAuthorizationStatus({status: 'AUTH'}));
+    dispatch(setAuthorizationStatus({status: 'NO_AUTH'}));
 
     dispatch(fetchOffers());
     dispatch(fetchFavoriteOffers());

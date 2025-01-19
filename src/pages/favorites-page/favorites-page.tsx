@@ -6,7 +6,7 @@ import FavoritesCityItem from '../../components/favorites-city-item/favorites-ci
 
 
 export default function FavoritesPage(): JSX.Element {
-  const favoriteOffers = useAppSelector((state) => state.loadedFavoriteOffers);
+  const favoriteOffers = useAppSelector((state) => state.loadedFavoriteOffers.data);
   const isEmptyList = favoriteOffers.length === 0;
   const sortedFavoritesByCity = sortOffersByCity(favoriteOffers);
 
