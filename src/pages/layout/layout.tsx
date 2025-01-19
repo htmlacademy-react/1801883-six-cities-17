@@ -12,8 +12,8 @@ export default function Layout(): JSX.Element {
   const currentPagePath = useLocation().pathname;
   const currentPageName = getPageName(currentPagePath);
 
-  const user = useAppSelector((state) => state.user);
-  const favoriteCount = useAppSelector((state) => state.loadedFavoriteOffers).length;
+  const user = useAppSelector((state) => state.user.data);
+  const favoriteCount = useAppSelector((state) => state.loadedFavoriteOffers.data).length;
 
   const isAdditionalClass = currentPageName === 'Main' || currentPageName === 'Login' || currentPageName === 'Favorites' && favoriteCount === 0;
 

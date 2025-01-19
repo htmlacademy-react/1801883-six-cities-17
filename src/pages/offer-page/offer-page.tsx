@@ -19,9 +19,9 @@ import OfferCardsList from '../../components/offer-cards-list/offer-cards-list';
 
 export default function OfferPage(): JSX.Element {
   const offerId = useParams().id;
-  const displayedOffer = useAppSelector((state) => state.loadedFullOffer);
-  const comments = useAppSelector((state) => state.loadedComments);
-  const nearOffers = useAppSelector((state) => state.loadedNearOffers);
+  const displayedOffer = useAppSelector((state) => state.loadedFullOffer.data);
+  const comments = useAppSelector((state) => state.loadedComments.data);
+  const nearOffers = useAppSelector((state) => state.loadedNearOffers.data);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
