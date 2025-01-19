@@ -31,26 +31,30 @@ export const fetchFavoriteOffers = createAsyncThunk<Offer[], undefined, ThunkApi
 
 export const checkAuthorization = createAsyncThunk<User, undefined, ThunkApiConfig>(
   'user/CheckAuthorizationStatus',
-  async (_arg, { extra: api }) => {
+  async (_arg, { dispatch, extra: api }) => {
     dropToken();
     const response = await api.get<User>(APIRoute.Login);
     saveToken(response.data.token);
+    dispatch(fetchOffers());
+    dispatch(fetchFavoriteOffers());
     return response.data;
   }
 );
 
 export const login = createAsyncThunk<User, LoginData, ThunkApiConfig>(
   'user/login',
-  async ({email, password}, { extra: api }) => {
+  async ({email, password}, { dispatch, extra: api }) => {
     dropToken();
     const response = await api.post<User>(APIRoute.Login, {email, password});
     saveToken(response.data.token);
+    dispatch(fetchOffers());
+    dispatch(fetchFavoriteOffers());
     return response.data;
   }
 );
 
 export const logout = createAsyncThunk<void, undefined, ThunkApiConfig>(
-  'user/login',
+  'user/logout',
   async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Login);
     dropToken();

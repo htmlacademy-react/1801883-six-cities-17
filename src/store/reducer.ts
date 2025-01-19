@@ -40,9 +40,9 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchOffers.rejected, (state) => {
       state.loadedOffers.status = LoadingStatus.Error;
     })
-    .addCase(loadFullOffer, () => {
-      // state.loadedFullOffer.data = mockData.getFullOffer(action.payload.id);
-    })
+    // .addCase(loadFullOffer, () => {
+    //   // state.loadedFullOffer.data = mockData.getFullOffer(action.payload.id);
+    // })
     .addCase(fetchFavoriteOffers.pending, (state) => {
       state.loadedFavoriteOffers.status = LoadingStatus.Loading;
     })
@@ -53,12 +53,12 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchFavoriteOffers.rejected, (state) => {
       state.loadedFavoriteOffers.status = LoadingStatus.Error;
     })
-    .addCase(loadNearOffers, () => {
-      // state.loadedNearOffers.data = [...mockData.offers].slice(0, MAX_NEAR_OFFERS_NUMBER);
-    })
-    .addCase(loadComments, () => {
-      // state.loadedComments.data = mockData.getComments().sort(sortComments);
-    })
+    // .addCase(loadNearOffers, () => {
+    //   // state.loadedNearOffers.data = [...mockData.offers].slice(0, MAX_NEAR_OFFERS_NUMBER);
+    // })
+    // .addCase(loadComments, () => {
+    //   // state.loadedComments.data = mockData.getComments().sort(sortComments);
+    // })
     .addCase(checkAuthorization.fulfilled, (state, action) => {
       state.user.data = action.payload;
       state.user.status = LoadingStatus.Loaded;
