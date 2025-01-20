@@ -1,4 +1,6 @@
 import { AppRoute } from '../../../consts';
+import { logout } from '../../../store/api-actions';
+import { useAppDispatch } from '../../../hooks/use-app-dispatch';
 import { Link } from 'react-router-dom';
 import Avatar from '../../avatar/avatar';
 
@@ -11,6 +13,13 @@ type UserInfoProps = {
 
 export default function UserInfo({isLogged = false, email, favoriteCount}: UserInfoProps): JSX.Element {
   const linkRoute = isLogged ? AppRoute.Favorites : AppRoute.Login;
+  const dispatch = useAppDispatch();
+
+  const handleSignOutClick = (evt: React.MouseEvent) => {
+    evt.preventDefault();
+    dispatch(logout());
+  };
+
 
   return (
     <nav className="header__nav">
@@ -32,9 +41,9 @@ export default function UserInfo({isLogged = false, email, favoriteCount}: UserI
 
         {isLogged && (
           <li className="header__nav-item">
-            <a className="header__nav-link" href="#">
+            <Link to='' className="header__nav-link" onClick={ handleSignOutClick }>
               <span className="header__signout">Sign out</span>
-            </a>
+            </Link>
           </li>
         )}
       </ul>
