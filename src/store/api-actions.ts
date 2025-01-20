@@ -1,4 +1,4 @@
-import { Offer, User, LoginData } from '../types';
+import { Offer, FullOffer, Comment, User, LoginData } from '../types';
 import { APIRoute } from '../consts';
 import { AppDispatch } from '../hooks/use-app-dispatch';
 import { State } from '../hooks/use-app-selector';
@@ -25,6 +25,30 @@ export const fetchFavoriteOffers = createAsyncThunk<Offer[], undefined, ThunkApi
   'data/loadFavoriteOffers',
   async (_arg, { extra: api }) => {
     const response = await api.get<Offer[]>(APIRoute.Favorite);
+    return response.data;
+  }
+);
+
+export const fetchFullOffer = createAsyncThunk<FullOffer, {id: string}, ThunkApiConfig>(
+  'data/fetchFullOffer',
+  async ({id}, { extra: api }) => {
+    const response = await api.get<FullOffer>(`${APIRoute.Offers}/${id}`);
+    return response.data;
+  }
+);
+
+export const fetchNearOffers = createAsyncThunk<Offer[], {id: string}, ThunkApiConfig>(
+  'data/fetchNearOffers',
+  async ({id}, { extra: api }) => {
+    const response = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
+    return response.data;
+  }
+);
+
+export const fetchComments = createAsyncThunk<Comment[], {id: string}, ThunkApiConfig>(
+  'data/fetchComments',
+  async ({id}, { extra: api }) => {
+    const response = await api.get<Comment[]>(`${APIRoute.Comments}/${id}`);
     return response.data;
   }
 );
