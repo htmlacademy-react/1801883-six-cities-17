@@ -1,12 +1,9 @@
 import { AppState } from '../types';
 import { CITIES, AuthorizationStatus, LoadingStatus } from '../consts';
-import { changeCity, changeSortType, loadFullOffer, loadNearOffers, loadComments, loadUser, setAuthorizationStatus } from './action';
-import { fetchOffers, fetchFavoriteOffers } from './api-actions';
+import { changeCity, changeSortType } from './action';
+import { fetchOffers, fetchFavoriteOffers, checkAuthorization, login, logout } from './api-actions';
 import { createReducer } from '@reduxjs/toolkit';
-import { sortOffersByCity, sortComments } from '../utils';
-import mockData from '../mock/mock-data';
-
-const MAX_NEAR_OFFERS_NUMBER = 3;
+import { sortOffersByCity } from '../utils';
 
 const initialState: AppState = {
   offers: {Paris: [], Cologne: [], Brussels: [], Amsterdam: [], Hamburg: [], Dusseldorf: []},
@@ -41,9 +38,6 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchOffers.rejected, (state) => {
       state.loadedOffers.status = LoadingStatus.Error;
     })
-    .addCase(loadFullOffer, (state, action) => {
-      state.loadedFullOffer.data = mockData.getFullOffer(action.payload.id);
-    })
     .addCase(fetchFavoriteOffers.pending, (state) => {
       state.loadedFavoriteOffers.status = LoadingStatus.Loading;
     })
@@ -54,16 +48,29 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchFavoriteOffers.rejected, (state) => {
       state.loadedFavoriteOffers.status = LoadingStatus.Error;
     })
-    .addCase(loadNearOffers, (state) => {
-      state.loadedNearOffers.data = [...mockData.offers].slice(0, MAX_NEAR_OFFERS_NUMBER);
+    .addCase(checkAuthorization.fulfilled, (state, action) => {
+      state.user.data = action.payload;
+      state.user.status = LoadingStatus.Loaded;
+      state.authorizationStatus = AuthorizationStatus.Auth;
     })
-    .addCase(loadComments, (state) => {
-      state.loadedComments.data = mockData.getComments().sort(sortComments);
+    .addCase(checkAuthorization.rejected, (state) => {
+      state.user.data = undefined;
+      state.user.status = LoadingStatus.Error;
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
     })
-    .addCase(loadUser, (state, action) => {
-      state.user.data = action.payload.user;
+    .addCase(login.fulfilled, (state, action) => {
+      state.user.data = action.payload;
+      state.user.status = LoadingStatus.Loaded;
+      state.authorizationStatus = AuthorizationStatus.Auth;
     })
-    .addCase(setAuthorizationStatus, (state, action) => {
-      state.authorizationStatus = action.payload.status;
+    .addCase(login.rejected, (state) => {
+      state.user.data = undefined;
+      state.user.status = LoadingStatus.Error;
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
+    })
+    .addCase(logout.fulfilled, (state) => {
+      state.user.data = undefined;
+      state.user.status = LoadingStatus.Unknown;
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
     });
 });

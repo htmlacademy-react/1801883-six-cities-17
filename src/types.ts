@@ -58,6 +58,11 @@ type SortingType = keyof typeof SortType;
 
 type Authorization = typeof AuthorizationStatus[keyof typeof AuthorizationStatus];
 
+type LoginData = {
+  email: string;
+  password: string;
+};
+
 type LoadedData<T> = {
   data: T;
   status: typeof LoadingStatus[keyof typeof LoadingStatus];
@@ -76,4 +81,4 @@ type AppState = {
   loadedComments: LoadedData<Comment[]>;
 }
 
-export type { Offer, FullOffer, Cities, Location, User, UserShort, Comment, Page, SortingType, Authorization, LoadedData, AppState };
+export type { Offer, FullOffer, Cities, Location, User, UserShort, Comment, Page, SortingType, Authorization, LoginData, LoadedData, AppState };

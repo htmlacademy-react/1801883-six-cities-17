@@ -1,15 +1,37 @@
-import { CITIES } from '../../consts';
+import { CITIES, AppRoute } from '../../consts';
 import { generateRandomNumber } from '../../utils';
+import { login } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 import TabItem from '../../components/tab-item/tab-item';
 
 
 export default function LoginPage(): JSX.Element {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleFormSubmit = (evt: React.FormEvent) => {
+    evt.preventDefault();
+
+    if (emailRef.current !== null && passwordRef.current !== null) {
+      dispatch(login({
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      }));
+    }
+
+    navigate(AppRoute.Main.Path);
+  };
+
   return (
     <main className="page__main page__main--login">
       <div className="page__login-container container">
         <section className="login">
           <h1 className="login__title">Sign in</h1>
-          <form className="login__form form" action="#" method="post">
+          <form className="login__form form" action="#" method="post" onSubmit={ handleFormSubmit }>
 
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">E-mail</label>
@@ -19,6 +41,7 @@ export default function LoginPage(): JSX.Element {
                 name="email"
                 placeholder="Email"
                 required
+                ref={ emailRef }
               />
             </div>
 
@@ -30,6 +53,7 @@ export default function LoginPage(): JSX.Element {
                 name="password"
                 placeholder="Password"
                 required
+                ref={ passwordRef }
               />
             </div>
 

@@ -1,7 +1,8 @@
-import { Offer } from '../types';
+import { Offer, User, LoginData } from '../types';
 import { APIRoute } from '../consts';
 import { AppDispatch } from '../hooks/use-app-dispatch';
 import { State } from '../hooks/use-app-selector';
+import { saveToken, dropToken } from '../services/token';
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -25,5 +26,37 @@ export const fetchFavoriteOffers = createAsyncThunk<Offer[], undefined, ThunkApi
   async (_arg, { extra: api }) => {
     const response = await api.get<Offer[]>(APIRoute.Favorite);
     return response.data;
+  }
+);
+
+export const checkAuthorization = createAsyncThunk<User, undefined, ThunkApiConfig>(
+  'user/CheckAuthorizationStatus',
+  async (_arg, { dispatch, extra: api }) => {
+    dropToken();
+    const response = await api.get<User>(APIRoute.Login);
+    saveToken(response.data.token);
+    dispatch(fetchOffers());
+    dispatch(fetchFavoriteOffers());
+    return response.data;
+  }
+);
+
+export const login = createAsyncThunk<User, LoginData, ThunkApiConfig>(
+  'user/login',
+  async ({email, password}, { dispatch, extra: api }) => {
+    dropToken();
+    const response = await api.post<User>(APIRoute.Login, {email, password});
+    saveToken(response.data.token);
+    dispatch(fetchOffers());
+    dispatch(fetchFavoriteOffers());
+    return response.data;
+  }
+);
+
+export const logout = createAsyncThunk<void, undefined, ThunkApiConfig>(
+  'user/logout',
+  async (_arg, { extra: api }) => {
+    await api.delete(APIRoute.Login);
+    dropToken();
   }
 );
