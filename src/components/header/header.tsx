@@ -23,7 +23,7 @@ export default function Header({isLoginHidden = false, isMainPage = false, favor
 
           {isLoginHidden || (
             isAuthorized && user
-              ? <UserInfo isLogged email={ user.email } favoriteCount={ favoriteCount } />
+              ? <UserInfo isLogged email={ user.email } avatarUrl={ user.avatarUrl } favoriteCount={ favoriteCount } />
               : <UserInfo />
           )}
         </div>

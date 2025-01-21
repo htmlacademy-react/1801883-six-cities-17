@@ -7,7 +7,7 @@ const BACKEND_URL = 'https://16.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
 const EnabledStatusCodes: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
-  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.UNAUTHORIZED]: false,
   [StatusCodes.NOT_FOUND]: true,
   [StatusCodes.CONFLICT]: true,
   [StatusCodes.INTERNAL_SERVER_ERROR]: true,

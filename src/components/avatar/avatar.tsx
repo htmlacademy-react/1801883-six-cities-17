@@ -6,7 +6,9 @@ type AvatarProps = {
 
 const AvatarSetting = {
   Header: {
-    Class: 'header'
+    Class: 'header',
+    Size: {width: 54, height: 54},
+    ImageAlternate: 'User avatar'
   },
   Host: {
     Size: {width: 74, height: 74},
@@ -26,7 +28,7 @@ export default function Avatar({type, avatarUrl, isPro = false}: AvatarProps): J
 
   return (
     <div className={ `${baseClass}__avatar-wrapper user__avatar-wrapper ${isPro && `${baseClass}__avatar-wrapper--pro`}` }>
-      {avatarUrl && type !== 'Header' &&
+      {avatarUrl &&
         <img
           className={ `${baseClass}__avatar user__avatar` }
           src={ avatarUrl }

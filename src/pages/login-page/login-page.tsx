@@ -20,10 +20,13 @@ export default function LoginPage(): JSX.Element {
       dispatch(login({
         email: emailRef.current.value,
         password: passwordRef.current.value
-      }));
+      }))
+        .then(({meta}) => {
+          if (meta.requestStatus === 'fulfilled') {
+            navigate(AppRoute.Main.Path);
+          }
+        });
     }
-
-    navigate(AppRoute.Main.Path);
   };
 
   return (
@@ -53,6 +56,8 @@ export default function LoginPage(): JSX.Element {
                 name="password"
                 placeholder="Password"
                 required
+                pattern="^.*(?=.*[a-zA-Z])(?=.*\d).*$"
+                title="Password must contain at least 1 letter and 1 number"
                 ref={ passwordRef }
               />
             </div>
