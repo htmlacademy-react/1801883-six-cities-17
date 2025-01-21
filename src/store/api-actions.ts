@@ -1,4 +1,4 @@
-import { Offer, FullOffer, Comment, User, LoginData } from '../types';
+import { Offer, FullOffer, Comment, User, LoginData, CommentData } from '../types';
 import { APIRoute } from '../consts';
 import { AppDispatch } from '../hooks/use-app-dispatch';
 import { State } from '../hooks/use-app-selector';
@@ -53,10 +53,17 @@ export const fetchComments = createAsyncThunk<Comment[], {id: string}, ThunkApiC
   }
 );
 
+export const postComment = createAsyncThunk<Comment, {id: string; data: CommentData}, ThunkApiConfig>(
+  'data/postComment',
+  async ({id, data}, { extra: api }) => {
+    const response = await api.post<Comment>(`${APIRoute.Comments}/${id}`, data);
+    return response.data;
+  }
+);
+
 export const checkAuthorization = createAsyncThunk<User, undefined, ThunkApiConfig>(
   'user/CheckAuthorizationStatus',
   async (_arg, { dispatch, extra: api }) => {
-    dropToken();
     const response = await api.get<User>(APIRoute.Login);
     saveToken(response.data.token);
     dispatch(fetchOffers());

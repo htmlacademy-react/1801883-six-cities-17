@@ -63,6 +63,11 @@ type LoginData = {
   password: string;
 };
 
+type CommentData = {
+  comment: string;
+  rating: number;
+};
+
 type LoadedData<T> = {
   data: T;
   status: typeof LoadingStatus[keyof typeof LoadingStatus];
@@ -79,6 +84,7 @@ type AppState = {
   loadedFavoriteOffers: LoadedData<Offer[]>;
   loadedNearOffers: LoadedData<Offer[]>;
   loadedComments: LoadedData<Comment[]>;
+  isNewCommentLoading: boolean;
 }
 
-export type { Offer, FullOffer, Cities, Location, User, UserShort, Comment, Page, SortingType, Authorization, LoginData, LoadedData, AppState };
+export type { Offer, FullOffer, Cities, Location, User, UserShort, Comment, Page, SortingType, Authorization, LoginData, CommentData, LoadedData, AppState };

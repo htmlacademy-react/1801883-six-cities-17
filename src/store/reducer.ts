@@ -1,7 +1,7 @@
 import { AppState } from '../types';
 import { CITIES, AuthorizationStatus, LoadingStatus } from '../consts';
 import { changeCity, changeSortType } from './action';
-import { fetchOffers, fetchFavoriteOffers, fetchFullOffer, fetchNearOffers, fetchComments, checkAuthorization, login, logout } from './api-actions';
+import { fetchOffers, fetchFavoriteOffers, fetchFullOffer, fetchNearOffers, fetchComments, postComment, checkAuthorization, login, logout } from './api-actions';
 import { createReducer } from '@reduxjs/toolkit';
 import { sortOffersByCity, sortComments } from '../utils';
 
@@ -11,13 +11,14 @@ const initialState: AppState = {
   offers: {Paris: [], Cologne: [], Brussels: [], Amsterdam: [], Hamburg: [], Dusseldorf: []},
   currentCity: CITIES[0],
   sortType: 'Popular',
+  user: {data: undefined, status: LoadingStatus.Unknown},
+  authorizationStatus: AuthorizationStatus.Unknown,
   loadedOffers: {data: [], status: LoadingStatus.Unknown},
   loadedFullOffer: {data: undefined, status: LoadingStatus.Unknown},
   loadedNearOffers: {data: [], status: LoadingStatus.Unknown},
   loadedComments: {data: [], status: LoadingStatus.Unknown},
   loadedFavoriteOffers: {data: [], status: LoadingStatus.Unknown},
-  user: {data: undefined, status: LoadingStatus.Unknown},
-  authorizationStatus: AuthorizationStatus.Unknown
+  isNewCommentLoading: false
 };
 
 
@@ -74,6 +75,16 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchComments.rejected, (state) => {
       state.loadedComments.data = [];
       state.loadedComments.status = LoadingStatus.Error;
+    })
+    .addCase(postComment.pending, (state) => {
+      state.isNewCommentLoading = true;
+    })
+    .addCase(postComment.fulfilled, (state, action) => {
+      state.loadedComments.data = state.loadedComments.data.concat(action.payload).sort(sortComments);
+      state.isNewCommentLoading = false;
+    })
+    .addCase(postComment.rejected, (state) => {
+      state.isNewCommentLoading = false;
     })
     .addCase(fetchFavoriteOffers.pending, (state) => {
       state.loadedFavoriteOffers.status = LoadingStatus.Loading;
