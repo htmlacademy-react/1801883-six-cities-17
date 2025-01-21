@@ -1,12 +1,13 @@
 type RatingStarProps = {
   value: number;
   title: string;
+  isChecked: boolean;
   isDisabled: boolean;
   handleStarChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 
-export default function RatingStar({value, title, isDisabled, handleStarChange}: RatingStarProps): JSX.Element {
+export default function RatingStar({value, title, isChecked, isDisabled, handleStarChange}: RatingStarProps): JSX.Element {
   return (
     <>
       <input
@@ -16,6 +17,7 @@ export default function RatingStar({value, title, isDisabled, handleStarChange}:
         id={ `${value}-stars` }
         type="radio"
         disabled={ isDisabled }
+        checked={ isChecked }
         onChange={ handleStarChange }
       />
 

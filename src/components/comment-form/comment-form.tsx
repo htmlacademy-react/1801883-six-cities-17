@@ -6,6 +6,11 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import RatingStar from './components/rating-star';
 
+const DefaultStateForm = {
+  rating: 0 as number,
+  comment: '' as string
+} as const;
+
 const StarSetting = [
   { value: 5, title: 'perfect' },
   { value: 4, title: 'good' },
@@ -19,27 +24,29 @@ const TextLimit = {Min: 50, Max: 300} as const;
 
 export default function CommentForm(): JSX.Element {
   const offerId = useParams().id;
-  const [userComment, setUserComment] = useState({rating: 0, comment: ''});
+  const [userReview, setUserReview] = useState(DefaultStateForm);
   const isLoading = useAppSelector((state) => state.isNewCommentLoading);
-  const isSubmitEnable = userComment.comment.length >= TextLimit.Min && userComment.comment.length <= TextLimit.Max && Boolean(userComment.rating);
+  const isSubmitEnable = userReview.comment.length >= TextLimit.Min && userReview.comment.length <= TextLimit.Max && Boolean(userReview.rating);
   const dispatch = useAppDispatch();
 
   const handleStarChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setUserComment({...userComment, rating: Number(evt.target.value)});
+    setUserReview({...userReview, rating: Number(evt.target.value)});
   };
 
   const handleTextChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setUserComment({...userComment, comment: evt.target.value});
+    setUserReview({...userReview, comment: evt.target.value});
   };
 
   const handleFormSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
 
     if (offerId) {
-      dispatch(postComment({id: offerId, data: userComment}))
+      dispatch(postComment({id: offerId, data: userReview}))
         .then(({meta}) => {
           if (meta.requestStatus === 'rejected') {
             toast.error('Failed to send review');
+          } else {
+            setUserReview(DefaultStateForm);
           }
         });
     }
@@ -50,7 +57,16 @@ export default function CommentForm(): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
-          StarSetting.map(({value, title}) => <RatingStar key={ title } value={ value } title={ title } isDisabled={ isLoading } handleStarChange={ handleStarChange }/>)
+          StarSetting.map(({value, title}) => (
+            <RatingStar
+              key={ title }
+              value={ value }
+              title={ title }
+              isChecked={ userReview.rating === value }
+              isDisabled={ isLoading }
+              handleStarChange={ handleStarChange }
+            />
+          ))
         }
       </div>
 
@@ -59,7 +75,7 @@ export default function CommentForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={ userComment.comment }
+        value={ userReview.comment }
         disabled={ isLoading }
         onChange={ handleTextChange }
       />
