@@ -66,7 +66,6 @@ export const checkAuthorization = createAsyncThunk<User, undefined, ThunkApiConf
   async (_arg, { dispatch, extra: api }) => {
     const response = await api.get<User>(APIRoute.Login);
     saveToken(response.data.token);
-    dispatch(fetchOffers());
     dispatch(fetchFavoriteOffers());
     return response.data;
   }
@@ -78,7 +77,6 @@ export const login = createAsyncThunk<User, LoginData, ThunkApiConfig>(
     dropToken();
     const response = await api.post<User>(APIRoute.Login, {email, password});
     saveToken(response.data.token);
-    dispatch(fetchOffers());
     dispatch(fetchFavoriteOffers());
     return response.data;
   }

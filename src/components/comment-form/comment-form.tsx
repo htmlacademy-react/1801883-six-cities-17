@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import RatingStar from './components/rating-star';
 
-const DefaultStateForm = {
+const DefaultFormState = {
   rating: 0 as number,
   comment: '' as string
 } as const;
@@ -24,7 +24,7 @@ const TextLimit = {Min: 50, Max: 300} as const;
 
 export default function CommentForm(): JSX.Element {
   const offerId = useParams().id;
-  const [userReview, setUserReview] = useState(DefaultStateForm);
+  const [userReview, setUserReview] = useState(DefaultFormState);
   const isLoading = useAppSelector((state) => state.isNewCommentLoading);
   const isSubmitEnable = userReview.comment.length >= TextLimit.Min && userReview.comment.length <= TextLimit.Max && Boolean(userReview.rating);
   const dispatch = useAppDispatch();
@@ -46,7 +46,7 @@ export default function CommentForm(): JSX.Element {
           if (meta.requestStatus === 'rejected') {
             toast.error('Failed to send review');
           } else {
-            setUserReview(DefaultStateForm);
+            setUserReview(DefaultFormState);
           }
         });
     }
