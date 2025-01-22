@@ -1,7 +1,11 @@
+import { SortType } from '../../consts';
 import { Offer, Cities } from '../../types';
 import classNames from 'classnames';
-import MainListInfo from './components/main-list-info';
-import OfferCard from '../offer-card/offer-card';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { memo } from 'react';
+import { MainListInfo } from './components/main-list-info';
+import { OfferCard } from '../offer-card/offer-card';
+
 
 type OfferCardsListProps = {
   offers: Offer[];
@@ -26,7 +30,10 @@ const ListClassName = {
 } as const;
 
 
-export default function OfferCardsList({offers, isEmptyList, currentCity, listType = 'Main', handleOfferMouseOver}: OfferCardsListProps): JSX.Element {
+function BaseOfferCardsList({offers, isEmptyList, currentCity, listType = 'Main', handleOfferMouseOver}: OfferCardsListProps): JSX.Element {
+  const sortType = useAppSelector((state) => state.sortType);
+  const sortedOffers = [...offers].sort(SortType[sortType].sortMethod);
+
   const sectionClass = classNames({
     [ListClassName.Main.Section.FilledList]: listType === 'Main' && !isEmptyList,
     [ListClassName.Main.Section.EmptyList]: listType === 'Main' && isEmptyList,
@@ -36,13 +43,15 @@ export default function OfferCardsList({offers, isEmptyList, currentCity, listTy
   return (
     <section className={ sectionClass }>
       {listType === 'Near' && <h2 className="near-places__title">Other places in the neighbourhood</h2>}
-      {listType === 'Main' && <MainListInfo offersNumber={ offers.length } currentCity={ currentCity } />}
+      {listType === 'Main' && <MainListInfo offersNumber={ sortedOffers.length } currentCity={ currentCity } />}
 
       {isEmptyList || (
         <div className={ classNames('places__list', ListClassName[listType].Div) }>
-          {offers.map((offer: Offer) => <OfferCard key={ offer.id } offer={ offer } cardType={ listType } handleOfferMouseOver={ handleOfferMouseOver }/>)}
+          {sortedOffers.map((offer: Offer) => <OfferCard key={ offer.id } offer={ offer } cardType={ listType } handleOfferMouseOver={ handleOfferMouseOver }/>)}
         </div>
       )}
     </section>
   );
 }
+
+export const OfferCardsList = memo(BaseOfferCardsList);

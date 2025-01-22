@@ -1,6 +1,7 @@
 import { Cities } from '../../../types';
 import { checkPluralRule } from '../../../utils';
 import SortingForm from '../../sorting-form/sorting-form';
+import { memo } from 'react';
 
 type MainListInfoProps = {
   offersNumber: number;
@@ -8,7 +9,7 @@ type MainListInfoProps = {
 }
 
 
-export default function MainListInfo({offersNumber, currentCity}: MainListInfoProps): JSX.Element {
+function BaseMainListInfo({offersNumber, currentCity}: MainListInfoProps): JSX.Element {
   if (offersNumber > 0) {
     return (
       <>
@@ -26,3 +27,5 @@ export default function MainListInfo({offersNumber, currentCity}: MainListInfoPr
     </div>
   );
 }
+
+export const MainListInfo = memo(BaseMainListInfo);

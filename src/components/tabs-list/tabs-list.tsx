@@ -1,13 +1,14 @@
 import { CITIES } from '../../consts';
 import { Cities } from '../../types';
 import TabsItem from '../tab-item/tab-item';
+import { memo } from 'react';
 
 type TabsListProps = {
   currentCity: Cities;
 }
 
 
-export default function TabsList({currentCity}: TabsListProps): JSX.Element {
+function BaseTabsList({currentCity}: TabsListProps): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
@@ -20,3 +21,5 @@ export default function TabsList({currentCity}: TabsListProps): JSX.Element {
     </div>
   );
 }
+
+export const TabsList = memo(BaseTabsList);

@@ -15,7 +15,7 @@ import Goods from '../../components/offer-components/goods/goods';
 import HostInformation from '../../components/offer-components/host-information/host-information';
 import CommentsBlock from '../../components/comments-block/comments-block';
 import Map from '../../components/map/map';
-import OfferCardsList from '../../components/offer-cards-list/offer-cards-list';
+import { OfferCardsList } from '../../components/offer-cards-list/offer-cards-list';
 
 
 export default function OfferPage(): JSX.Element {
@@ -26,7 +26,6 @@ export default function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     if (offerId) {
       dispatch(fetchFullOffer({id: offerId}));
       dispatch(fetchNearOffers({id: offerId}));
