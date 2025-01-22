@@ -1,6 +1,6 @@
 import { Comment } from '../../types';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import CommentItem from '../comment-item/comment-item';
+import { CommentItem } from '../comment-item/comment-item';
 import CommentForm from '../comment-form/comment-form';
 
 type CommentsBlockProps = {

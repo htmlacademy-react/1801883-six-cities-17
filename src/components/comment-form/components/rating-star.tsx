@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type RatingStarProps = {
   value: number;
   title: string;
@@ -7,7 +9,7 @@ type RatingStarProps = {
 }
 
 
-export default function RatingStar({value, title, isChecked, isDisabled, handleStarChange}: RatingStarProps): JSX.Element {
+function BaseRatingStar({value, title, isChecked, isDisabled, handleStarChange}: RatingStarProps): JSX.Element {
   return (
     <>
       <input
@@ -29,3 +31,5 @@ export default function RatingStar({value, title, isChecked, isDisabled, handleS
     </>
   );
 }
+
+export const RatingStar = memo(BaseRatingStar);

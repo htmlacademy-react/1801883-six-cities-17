@@ -1,4 +1,5 @@
 import { Comment } from '../../types';
+import { memo } from 'react';
 import Avatar from '../avatar/avatar';
 import Rating from '../offer-components/rating/rating';
 
@@ -7,7 +8,7 @@ type CommentItemProps = {
 }
 
 
-export default function CommentItem({userComment}: CommentItemProps): JSX.Element {
+function BaseCommentItem({userComment}: CommentItemProps): JSX.Element {
   const {date, user, comment, rating} = userComment;
   const formattedDate = new Intl.DateTimeFormat('en-US', {month: 'long', year: 'numeric'}).format(new Date(date));
   const dateTime = date.split('T')[0];
@@ -27,3 +28,5 @@ export default function CommentItem({userComment}: CommentItemProps): JSX.Elemen
     </li>
   );
 }
+
+export const CommentItem = memo(BaseCommentItem);
