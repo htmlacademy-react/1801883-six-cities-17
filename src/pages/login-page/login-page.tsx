@@ -4,7 +4,7 @@ import { login } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
-import TabItem from '../../components/tab-item/tab-item';
+import { TabItem } from '../../components/tab-item/tab-item';
 
 
 export default function LoginPage(): JSX.Element {
