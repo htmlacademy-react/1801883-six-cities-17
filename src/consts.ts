@@ -37,21 +37,6 @@ const AuthorizationStatus = {
   Unknown: 'UNKNOWN'
 } as const;
 
-const APIRoute = {
-  Offers: '/offers',
-  Login: '/login',
-  Logout: '/logout',
-  Favorite: '/favorite',
-  Comments: '/comments'
-} as const;
-
-const LoadingStatus = {
-  Unknown: 'Unknown',
-  Loading: 'Loading',
-  Loaded: 'Loaded',
-  Error: 'Error'
-} as const;
-
 const RatingRange = { Min: 0, Max: 5 } as const;
 
 const SortType = {
@@ -73,4 +58,4 @@ const SortType = {
   }
 } as const;
 
-export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus, APIRoute, LoadingStatus, RatingRange, SortType };
+export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus, RatingRange, SortType };

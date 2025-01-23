@@ -1,4 +1,6 @@
 import { Offer } from '../../types';
+import { getOffersByCity, getCurrentCity } from '../../store/app/app-selectors';
+import { getLoadingStatus } from '../../store/offers/offers-selectors';
 import { useState, useCallback } from 'react';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import classNames from 'classnames';
@@ -11,9 +13,9 @@ import Spinner from '../../components/spinner/spinner';
 export default function MainPage(): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
-  const offers = useAppSelector((state) => state.offers[state.currentCity]);
-  const loadingStatus = useAppSelector((state) => state.loadedOffers.status);
-  const currentCity = useAppSelector((state) => state.currentCity);
+  const offers = useAppSelector(getOffersByCity);
+  const loadingStatus = useAppSelector(getLoadingStatus);
+  const currentCity = useAppSelector(getCurrentCity);
   const isEmptyList = offers.length === 0;
 
   const handleOfferMouseOver = useCallback(
