@@ -3,7 +3,7 @@ import { Offer, Cities } from '../../types';
 import classNames from 'classnames';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { memo } from 'react';
-import { MainListInfo } from './components/main-list-info';
+import { MainListInfo } from './main-list-info/main-list-info';
 import { OfferCard } from '../offer-card/offer-card';
 
 

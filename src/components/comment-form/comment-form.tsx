@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useCallback } from 'react';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { RatingStar } from './components/rating-star';
+import { RatingStar } from './rating-star/rating-star';
 
 const DEFAULT_RATING = 0;
 

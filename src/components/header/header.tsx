@@ -1,6 +1,6 @@
 import Logo from '../logo/logo';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import UserInfo from './components/user-info';
+import UserInfo from './user-info/user-info';
 
 type HeaderProps = {
   isLoginHidden?: boolean;
