@@ -1,6 +1,7 @@
 import { AppState } from '../types';
 import { SliceName, LoadingStatus } from '../consts';
 import { fetchOffers } from './offers-thunks';
+import { postFavorite } from '../favorites/favorites-thunks';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialSLiceState: Pick<AppState, 'loadedOffers'> = {
@@ -24,6 +25,11 @@ export const offersSlice = createSlice({
       .addCase(fetchOffers.rejected, (state) => {
         state.loadedOffers.data = [];
         state.loadedOffers.status = LoadingStatus.Error;
+      })
+      .addCase(postFavorite.fulfilled, (state, action) => {
+        const {id, isFavorite} = action.payload;
+        const indexOffer = state.loadedOffers.data.findIndex((offer) => offer.id === id);
+        state.loadedOffers.data[indexOffer].isFavorite = isFavorite;
       });
   },
 });

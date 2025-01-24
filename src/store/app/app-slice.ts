@@ -2,6 +2,7 @@ import { AppState } from '../types';
 import { Offer, Cities, SortingType } from '../../types';
 import { CITIES } from '../../consts';
 import { SliceName } from '../consts';
+import { postFavorite } from '../favorites/favorites-thunks';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { sortOffersByCity } from '../../utils';
 
@@ -25,6 +26,14 @@ export const appSlice = createSlice({
     changeSortType(state, action: PayloadAction<{sortType: SortingType}>) {
       state.sortType = action.payload.sortType;
     }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(postFavorite.fulfilled, (state, action) => {
+        const {id, city, isFavorite} = action.payload;
+        const indexOffer = state.offers[city.name].findIndex((offer) => offer.id === id);
+        state.offers[city.name][indexOffer].isFavorite = isFavorite;
+      });
   }
 });
 
