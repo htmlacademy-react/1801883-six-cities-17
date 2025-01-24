@@ -1,6 +1,7 @@
-import { postComment } from '../../store/api-actions';
+import { postComment } from '../../store/full-offer/full-offer-thunks';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { getCommentLoadingStatus } from '../../store/full-offer/full-offer-selectors';
 import { useParams } from 'react-router-dom';
 import { useCallback } from 'react';
 import { useState } from 'react';
@@ -24,7 +25,7 @@ export default function CommentForm(): JSX.Element {
   const offerId = useParams().id;
   const [userRating, setUserRating] = useState(DEFAULT_RATING);
   const [userComment, setUserComment] = useState('');
-  const isLoading = useAppSelector((state) => state.isNewCommentLoading);
+  const isLoading = useAppSelector(getCommentLoadingStatus);
   const isSubmitEnable = userComment.length >= TextLimit.Min && userComment.length <= TextLimit.Max && Boolean(userRating);
   const dispatch = useAppDispatch();
 

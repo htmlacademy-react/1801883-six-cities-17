@@ -3,7 +3,7 @@ import { Offer, Cities } from '../../types';
 import classNames from 'classnames';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getSortType } from '../../store/app/app-selectors';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { MainListInfo } from './main-list-info/main-list-info';
 import { OfferCard } from '../offer-card/offer-card';
 
@@ -33,7 +33,7 @@ const ListClassName = {
 
 function BaseOfferCardsList({offers, isEmptyList, currentCity, listType = 'Main', handleOfferMouseOver}: OfferCardsListProps): JSX.Element {
   const sortType = useAppSelector(getSortType);
-  const sortedOffers = [...offers].sort(SortType[sortType].sortMethod);
+  const sortedOffers = useMemo(() => [...offers].sort(SortType[sortType].sortMethod), [offers, sortType]);
 
   const sectionClass = classNames({
     [ListClassName.Main.Section.FilledList]: listType === 'Main' && !isEmptyList,

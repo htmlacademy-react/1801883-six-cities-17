@@ -1,5 +1,5 @@
 import { LoadingStatus } from './consts';
-import { Offer, FullOffer, Cities, User, SortingType, Authorization } from '../types';
+import { Offer, FullOffer, Cities, User, Comment, SortingType, Authorization } from '../types';
 import { sortOffersByCity } from '../utils';
 import { AxiosInstance } from 'axios';
 import { AppDispatch } from '../hooks/use-app-dispatch';
