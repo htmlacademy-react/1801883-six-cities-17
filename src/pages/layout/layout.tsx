@@ -1,6 +1,7 @@
 import { AppRoute } from '../../consts';
 import { getPageName } from '../../utils';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { getFavorites } from '../../store/favorites/favorites-selectors';
 import { Helmet } from 'react-helmet-async';
 import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -11,7 +12,7 @@ import Logo from '../../components/logo/logo';
 export default function Layout(): JSX.Element {
   const currentPagePath = useLocation().pathname;
   const currentPageName = getPageName(currentPagePath);
-  const favoriteCount = useAppSelector((state) => state.loadedFavoriteOffers.data).length;
+  const favoriteCount = useAppSelector(getFavorites).length;
 
   const isAdditionalClass = currentPageName === 'Main' || currentPageName === 'Login' || currentPageName === 'Favorites' && favoriteCount === 0;
 

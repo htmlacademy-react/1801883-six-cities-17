@@ -1,6 +1,6 @@
 import { Offer, Cities } from '../../types';
-import TabItem from '../tab-item/tab-item';
-import OfferCard from '../offer-card/offer-card';
+import { TabItem } from '../tab-item/tab-item';
+import { OfferCard } from '../offer-card/offer-card';
 
 type FavoritesListProps = {
   city: Cities;

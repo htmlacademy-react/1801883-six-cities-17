@@ -1,6 +1,7 @@
-import { fetchFullOffer, fetchNearOffers, fetchComments } from '../../store/api-actions';
+import { fetchFullOffer, fetchNearOffers, fetchComments } from '../../store/full-offer/full-offer-thunks';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { getFullOffer, getNearOffers, getComments } from '../../store/full-offer/full-offer-selectors';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
@@ -15,18 +16,17 @@ import Goods from '../../components/offer-components/goods/goods';
 import HostInformation from '../../components/offer-components/host-information/host-information';
 import CommentsBlock from '../../components/comments-block/comments-block';
 import Map from '../../components/map/map';
-import OfferCardsList from '../../components/offer-cards-list/offer-cards-list';
+import { OfferCardsList } from '../../components/offer-cards-list/offer-cards-list';
 
 
 export default function OfferPage(): JSX.Element {
-  const {data: offer, status: offerStatus} = useAppSelector((state) => state.loadedFullOffer);
-  const {data: comments} = useAppSelector((state) => state.loadedComments);
-  const {data: nearOffers} = useAppSelector((state) => state.loadedNearOffers);
+  const {data: offer, status: offerStatus} = useAppSelector(getFullOffer);
+  const {data: comments} = useAppSelector(getComments);
+  const {data: nearOffers} = useAppSelector(getNearOffers);
   const offerId = useParams().id;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     if (offerId) {
       dispatch(fetchFullOffer({id: offerId}));
       dispatch(fetchNearOffers({id: offerId}));

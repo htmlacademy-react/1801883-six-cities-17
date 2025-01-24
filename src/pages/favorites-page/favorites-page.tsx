@@ -1,12 +1,13 @@
 import { CITIES } from '../../consts';
 import { sortOffersByCity } from '../../utils';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { getFavorites } from '../../store/favorites/favorites-selectors';
 import classNames from 'classnames';
 import FavoritesCityItem from '../../components/favorites-city-item/favorites-city-item';
 
 
 export default function FavoritesPage(): JSX.Element {
-  const favoriteOffers = useAppSelector((state) => state.loadedFavoriteOffers.data);
+  const favoriteOffers = useAppSelector(getFavorites);
   const isEmptyList = favoriteOffers.length === 0;
   const sortedFavoritesByCity = sortOffersByCity(favoriteOffers);
 

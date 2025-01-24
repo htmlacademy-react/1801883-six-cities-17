@@ -1,6 +1,7 @@
 import Logo from '../logo/logo';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import UserInfo from './components/user-info';
+import { getAuthorizationStatus, getUser } from '../../store/user/user-selectors';
+import UserInfo from './user-info/user-info';
 
 type HeaderProps = {
   isLoginHidden?: boolean;
@@ -10,8 +11,8 @@ type HeaderProps = {
 
 
 export default function Header({isLoginHidden = false, isMainPage = false, favoriteCount}: HeaderProps): JSX.Element {
-  const user = useAppSelector((state) => state.user.data);
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus === 'AUTH');
+  const isAuthorized = useAppSelector(getAuthorizationStatus) === 'AUTH';
+  const user = useAppSelector(getUser);
 
   return (
     <header className="header">

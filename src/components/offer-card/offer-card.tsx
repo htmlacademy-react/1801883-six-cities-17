@@ -1,6 +1,7 @@
 import { Offer } from '../../types';
 import { AppRoute } from '../../consts';
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
 import classNames from 'classnames';
 import Premium from '../offer-components/premium/premium';
 import PreviewImage from '../offer-components/preview-image/preview-image';
@@ -32,7 +33,7 @@ const CardClass = {
 } as const;
 
 
-export default function OfferCard({offer, cardType, handleOfferMouseOver}: OfferCardProps): JSX.Element {
+function BaseOfferCard({offer, cardType, handleOfferMouseOver}: OfferCardProps): JSX.Element {
   const {id, title, type, price, isFavorite, isPremium, rating, previewImage} = offer;
   const currentLink = {
     path: AppRoute.Offer.Path.replace(':id', id),
@@ -66,3 +67,5 @@ export default function OfferCard({offer, cardType, handleOfferMouseOver}: Offer
     </article>
   );
 }
+
+export const OfferCard = memo(BaseOfferCard);

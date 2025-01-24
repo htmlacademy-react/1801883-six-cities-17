@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/app/app-slice';
+import { memo } from 'react';
 import classNames from 'classnames';
 import { Cities } from '../../types';
 import { AppRoute } from '../../consts';
@@ -13,7 +14,7 @@ type TabItemProps = {
 }
 
 
-export default function TabItem({city, isListItem, isActive = false}: TabItemProps): JSX.Element {
+function BaseTabItem({city, isListItem, isActive = false}: TabItemProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const classLink = classNames('locations__item-link', {
@@ -22,12 +23,20 @@ export default function TabItem({city, isListItem, isActive = false}: TabItemPro
   });
   const Tag = isListItem ? 'li' : 'div';
 
+  const handleLocationClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isListItem) {
+      evt.preventDefault();
+    }
+    dispatch(changeCity({city: city}));
+  };
+
   return (
     <Tag className="locations__item">
-      <Link to={ AppRoute.Main.Path } className={ classLink } onClick={ () => dispatch(changeCity({city: city})) }>
+      <Link to={ AppRoute.Main.Path } className={ classLink } onClick={ handleLocationClick }>
         <span>{city}</span>
       </Link>
     </Tag>
   );
 }
 
+export const TabItem = memo(BaseTabItem);
