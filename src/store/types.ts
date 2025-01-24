@@ -23,8 +23,8 @@ type AppState = {
   authorizationStatus: Authorization;
   user: LoadedData<User | undefined>;
   loadedOffers: LoadedData<Offer[]>;
+  loadedFavorites: LoadedData<Offer[]>;
   loadedFullOffer: LoadedData<FullOffer | undefined>;
-  loadedFavoriteOffers: LoadedData<Offer[]>;
   loadedNearOffers: LoadedData<Offer[]>;
   loadedComments: LoadedData<Comment[]>;
   isNewCommentLoading: boolean;
