@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type AvatarProps = {
   type: keyof typeof AvatarSetting;
   avatarUrl?: string;
@@ -23,7 +25,7 @@ const AvatarSetting = {
 } as const;
 
 
-export default function Avatar({type, avatarUrl, isPro = false}: AvatarProps): JSX.Element {
+function BaseAvatar({type, avatarUrl, isPro = false}: AvatarProps): JSX.Element {
   const baseClass = AvatarSetting[type].Class;
 
   return (
@@ -39,3 +41,5 @@ export default function Avatar({type, avatarUrl, isPro = false}: AvatarProps): J
     </div>
   );
 }
+
+export const Avatar = memo(BaseAvatar);

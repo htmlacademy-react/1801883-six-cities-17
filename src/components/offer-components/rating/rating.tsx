@@ -1,4 +1,5 @@
 import { RatingRange } from '../../../consts';
+import { memo } from 'react';
 
 type RatingProps = {
   rating: number;
@@ -12,7 +13,7 @@ const RatingClass = {
 } as const;
 
 
-export default function Rating({rating, type = 'Base'}: RatingProps): JSX.Element {
+function BaseRating({rating, type = 'Base'}: RatingProps): JSX.Element {
   const ratingInPercent: number = (Math.round(rating) / (RatingRange.Max - RatingRange.Min)) * 100;
 
   return (
@@ -26,3 +27,5 @@ export default function Rating({rating, type = 'Base'}: RatingProps): JSX.Elemen
     </div>
   );
 }
+
+export const Rating = memo(BaseRating);
