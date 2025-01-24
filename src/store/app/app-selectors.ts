@@ -4,9 +4,9 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const getAppState = (state: State) => state[SliceName.App];
 
-const getOffers = createSelector(
+const getOffersByCity = createSelector(
   getAppState,
-  (app) => app.offers
+  (app) => app.offers[app.currentCity]
 );
 
 const getCurrentCity = createSelector(
@@ -19,4 +19,4 @@ const getSortType = createSelector(
   (app) => app.sortType
 );
 
-export { getOffers, getCurrentCity, getSortType };
+export { getOffersByCity, getCurrentCity, getSortType };

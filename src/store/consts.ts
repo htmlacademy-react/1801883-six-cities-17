@@ -19,6 +19,7 @@ const SliceName = {
   App: 'APP',
   Offers: 'OFFERS',
   Offer: 'FULL_OFFER',
+  Favorites: 'FAVORITES',
   User: 'USER',
 } as const;
 

@@ -1,6 +1,6 @@
 import { CITIES, AppRoute } from '../../consts';
 import { generateRandomNumber } from '../../utils';
-import { login } from '../../store/api-actions';
+import { login } from '../../store/user/user-thunks';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';

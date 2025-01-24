@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/app/app-slice';
 import { memo } from 'react';
 import classNames from 'classnames';
 import { Cities } from '../../types';

@@ -1,6 +1,7 @@
 import { SortType } from '../../consts';
 import { SortingType } from '../../types';
-import { changeSortType } from '../../store/action';
+import { getSortType } from '../../store/app/app-selectors';
+import { changeSortType } from '../../store/app/app-slice';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useState } from 'react';
@@ -9,7 +10,7 @@ import classNames from 'classnames';
 
 export default function SortingForm(): JSX.Element {
   const [isOpened, setIsOpened] = useState<boolean>(false);
-  const currentSortingType = useAppSelector((state) => state.sortType);
+  const currentSortingType = useAppSelector(getSortType);
   const dispatch = useAppDispatch();
 
   const handleSortTypeClick = (selectedSortType: SortingType) => {

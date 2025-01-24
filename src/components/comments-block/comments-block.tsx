@@ -1,5 +1,6 @@
 import { Comment } from '../../types';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { getAuthorizationStatus } from '../../store/user/user-selectors';
 import { CommentItem } from '../comment-item/comment-item';
 import CommentForm from '../comment-form/comment-form';
 
@@ -11,7 +12,7 @@ const MAX_COMMENTS_NUMBER = 10;
 
 
 export default function CommentsBlock({comments}: CommentsBlockProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const trimmedComments = [...comments].slice(0, MAX_COMMENTS_NUMBER);
 
   return (

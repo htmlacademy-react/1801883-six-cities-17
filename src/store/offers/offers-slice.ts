@@ -1,6 +1,5 @@
 import { AppState } from '../types';
-import { SliceName } from '../consts';
-import { LoadingStatus } from '../consts';
+import { SliceName, LoadingStatus } from '../consts';
 import { fetchOffers } from './offers-thunks';
 import { createSlice } from '@reduxjs/toolkit';
 

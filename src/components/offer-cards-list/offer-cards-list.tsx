@@ -2,6 +2,7 @@ import { SortType } from '../../consts';
 import { Offer, Cities } from '../../types';
 import classNames from 'classnames';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { getSortType } from '../../store/app/app-selectors';
 import { memo } from 'react';
 import { MainListInfo } from './main-list-info/main-list-info';
 import { OfferCard } from '../offer-card/offer-card';
@@ -31,7 +32,7 @@ const ListClassName = {
 
 
 function BaseOfferCardsList({offers, isEmptyList, currentCity, listType = 'Main', handleOfferMouseOver}: OfferCardsListProps): JSX.Element {
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
   const sortedOffers = [...offers].sort(SortType[sortType].sortMethod);
 
   const sectionClass = classNames({
