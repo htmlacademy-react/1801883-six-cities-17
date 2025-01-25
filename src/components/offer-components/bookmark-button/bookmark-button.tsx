@@ -45,7 +45,7 @@ export default function BookmarkButton({id, isFavorite, isBigElement = false}: B
 
   return (
     <button
-      className={ `${Class}__bookmark-button button ${isFavorite && `${Class}__bookmark-button--active`}` }
+      className={ `${Class}__bookmark-button ${isFavorite ? `${Class}__bookmark-button--active` : ''} button` }
       type="button"
       onClick={ handleButtonClick }
       disabled={ isLoading }
