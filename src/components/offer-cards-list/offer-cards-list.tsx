@@ -3,7 +3,7 @@ import { Offer, Cities } from '../../types';
 import classNames from 'classnames';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getSortType } from '../../store/app/app-selectors';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useRef, useEffect } from 'react';
 import { MainListInfo } from './main-list-info/main-list-info';
 import { OfferCard } from '../offer-card/offer-card';
 
@@ -32,6 +32,16 @@ const ListClassName = {
 
 
 function BaseOfferCardsList({offers, isEmptyList, currentCity, listType = 'Main', handleOfferMouseOver}: OfferCardsListProps): JSX.Element {
+  const section = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (section.current) {
+      section.current.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+  }, [currentCity]);
+
   const sortType = useAppSelector(getSortType);
   const sortedOffers = useMemo(() => [...offers].sort(SortType[sortType].sortMethod), [offers, sortType]);
 
@@ -42,7 +52,7 @@ function BaseOfferCardsList({offers, isEmptyList, currentCity, listType = 'Main'
   });
 
   return (
-    <section className={ sectionClass }>
+    <section className={ sectionClass } ref={ section }>
       {listType === 'Near' && <h2 className="near-places__title">Other places in the neighbourhood</h2>}
       {listType === 'Main' && <MainListInfo offersNumber={ sortedOffers.length } currentCity={ currentCity } />}
 
