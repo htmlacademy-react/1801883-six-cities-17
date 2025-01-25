@@ -5,7 +5,6 @@ import { getAuthorizationStatus } from '../../../store/user/user-selectors';
 import { postFavorite } from '../../../store/favorites/favorites-thunks';
 import { useNavigate } from 'react-router-dom';
 import { useState, useMemo } from 'react';
-import classNames from 'classnames';
 
 
 type BookmarkButtonProps = {
@@ -46,7 +45,7 @@ export default function BookmarkButton({id, isFavorite, isBigElement = false}: B
 
   return (
     <button
-      className={ classNames(`${Class}__bookmark-button button`, {'place-card__bookmark-button--active': isFavorite}) }
+      className={ `${Class}__bookmark-button button ${isFavorite && `${Class}__bookmark-button--active`}` }
       type="button"
       onClick={ handleButtonClick }
       disabled={ isLoading }
