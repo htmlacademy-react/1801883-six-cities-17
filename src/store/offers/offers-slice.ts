@@ -2,6 +2,7 @@ import { AppState } from '../types';
 import { SliceName, LoadingStatus } from '../consts';
 import { fetchOffers } from './offers-thunks';
 import { postFavorite } from '../favorites/favorites-thunks';
+import { logout } from '../user/user-thunks';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialSLiceState: Pick<AppState, 'loadedOffers'> = {
@@ -30,6 +31,11 @@ export const offersSlice = createSlice({
         const {id, isFavorite} = action.payload;
         const indexOffer = state.loadedOffers.data.findIndex((offer) => offer.id === id);
         state.loadedOffers.data[indexOffer].isFavorite = isFavorite;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.loadedOffers.data.forEach((offer) => {
+          offer.isFavorite = false;
+        });
       });
   },
 });
