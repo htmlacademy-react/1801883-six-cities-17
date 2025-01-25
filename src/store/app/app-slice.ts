@@ -2,10 +2,10 @@ import { AppState } from '../types';
 import { Offer, Cities, SortingType } from '../../types';
 import { CITIES } from '../../consts';
 import { SliceName } from '../consts';
-import { postFavorite } from '../favorites/favorites-thunks';
+import { fetchFavorites, postFavorite } from '../favorites/favorites-thunks';
 import { logout } from '../user/user-thunks';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { sortOffersByCity } from '../../utils';
+import { sortOffersByCity, updateFavoriteFlag } from '../../utils';
 
 const initialState: Pick<AppState, 'offers' | 'currentCity' | 'sortType'> = {
   offers: {Paris: [], Cologne: [], Brussels: [], Amsterdam: [], Hamburg: [], Dusseldorf: []},
@@ -30,6 +30,10 @@ export const appSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(fetchFavorites.fulfilled, (state, action) => {
+        Object.values(state.offers)
+          .forEach((offers) => updateFavoriteFlag(offers, action.payload.ids));
+      })
       .addCase(postFavorite.fulfilled, (state, action) => {
         const {id, city, isFavorite} = action.payload;
         const indexOffer = state.offers[city.name].findIndex((offer) => offer.id === id);
@@ -37,11 +41,7 @@ export const appSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         Object.values(state.offers)
-          .forEach((offers) => offers
-            .forEach((offer) => {
-              offer.isFavorite = false;
-            })
-          );
+          .forEach((offers) => updateFavoriteFlag(offers, []));
       });
   }
 });

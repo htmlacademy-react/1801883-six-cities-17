@@ -4,11 +4,14 @@ import { APIRoute, SliceName } from '../consts';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 
-export const fetchFavorites = createAsyncThunk<Offer[], undefined, ThunkApiConfig>(
+export const fetchFavorites = createAsyncThunk<{favoriteOffers: Offer[]; ids: string[]}, undefined, ThunkApiConfig>(
   `${SliceName.Favorites}/fetch`,
   async (_arg, { extra: api }) => {
     const response = await api.get<Offer[]>(APIRoute.Favorite);
-    return response.data;
+    return {
+      favoriteOffers: response.data,
+      ids: response.data.map((offer) => offer.id)
+    };
   }
 );
 

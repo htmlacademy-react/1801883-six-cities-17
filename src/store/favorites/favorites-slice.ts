@@ -19,7 +19,7 @@ export const favoritesSlice = createSlice({
         state.loadedFavorites.status = LoadingStatus.Loading;
       })
       .addCase(fetchFavorites.fulfilled, (state, action) => {
-        state.loadedFavorites.data = action.payload;
+        state.loadedFavorites.data = action.payload.favoriteOffers;
         state.loadedFavorites.status = LoadingStatus.Loaded;
       })
       .addCase(fetchFavorites.rejected, (state) => {

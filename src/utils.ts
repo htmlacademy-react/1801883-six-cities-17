@@ -50,4 +50,12 @@ const sortByPriceHigh = (offerA: Offer, offerB: Offer): number => offerB.price -
 
 const sortByRating = (offerA: Offer, offerB: Offer): number => offerB.rating - offerA.rating;
 
-export { generateRandomNumber, capitalizeFirstLetter, checkPluralRule, getPageName, sortOffersByCity, sortComments, sortByPriceLow, sortByPriceHigh, sortByRating };
+const updateFavoriteFlag = (offers: Offer[], ids: string[]) => {
+  offers.forEach(
+    (offer) => {
+      offer.isFavorite = ids.includes(offer.id);
+    }
+  );
+};
+
+export { generateRandomNumber, capitalizeFirstLetter, checkPluralRule, getPageName, sortOffersByCity, sortComments, sortByPriceLow, sortByPriceHigh, sortByRating, updateFavoriteFlag };
