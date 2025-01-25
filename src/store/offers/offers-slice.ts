@@ -4,7 +4,7 @@ import { fetchOffers } from './offers-thunks';
 import { fetchFavorites, postFavorite } from '../favorites/favorites-thunks';
 import { logout } from '../user/user-thunks';
 import { createSlice } from '@reduxjs/toolkit';
-import { updateFavoriteFlag } from '../../utils';
+import { updateOffersFavoriteFlag, updateOfferFavoriteFlag } from '../../utils';
 
 const initialSLiceState: Pick<AppState, 'loadedOffers'> = {
   loadedOffers: {data: [], status: LoadingStatus.Unknown},
@@ -30,14 +30,13 @@ export const offersSlice = createSlice({
       })
       .addCase(postFavorite.fulfilled, (state, action) => {
         const {id, isFavorite} = action.payload;
-        const indexOffer = state.loadedOffers.data.findIndex((offer) => offer.id === id);
-        state.loadedOffers.data[indexOffer].isFavorite = isFavorite;
+        updateOfferFavoriteFlag(state.loadedOffers.data, id, isFavorite);
       })
       .addCase(fetchFavorites.fulfilled, (state, action) => {
-        updateFavoriteFlag(state.loadedOffers.data, action.payload.ids);
+        updateOffersFavoriteFlag(state.loadedOffers.data, action.payload.ids);
       })
       .addCase(logout.fulfilled, (state) => {
-        updateFavoriteFlag(state.loadedOffers.data, []);
+        updateOffersFavoriteFlag(state.loadedOffers.data, []);
       });
   },
 });
