@@ -2,12 +2,15 @@ import { CITIES, AppRoute } from '../../consts';
 import { generateRandomNumber } from '../../utils';
 import { login } from '../../store/user/user-thunks';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { getAuthorizationStatus } from '../../store/user/user-selectors';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { TabItem } from '../../components/tab-item/tab-item';
 
 
 export default function LoginPage(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
@@ -20,14 +23,15 @@ export default function LoginPage(): JSX.Element {
       dispatch(login({
         email: emailRef.current.value,
         password: passwordRef.current.value
-      }))
-        .then(({meta}) => {
-          if (meta.requestStatus === 'fulfilled') {
-            navigate(AppRoute.Main.Path);
-          }
-        });
+      }));
     }
   };
+
+  useEffect(() => {
+    if (authorizationStatus === 'AUTH'){
+      navigate(AppRoute.Main.Path);
+    }
+  }, [authorizationStatus, navigate]);
 
   return (
     <main className="page__main page__main--login">
