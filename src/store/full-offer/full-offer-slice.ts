@@ -2,7 +2,8 @@ import { AppState } from '../types';
 import { MAX_NEAR_OFFERS_NUMBER } from '../consts';
 import { SliceName, LoadingStatus } from '../consts';
 import { fetchFullOffer, fetchNearOffers, fetchComments, postComment } from './full-offer-thunks';
-import { sortComments } from '../../utils';
+import { postFavorite } from '../favorites/favorites-thunks';
+import { sortComments, updateOfferFavoriteFlag } from '../../utils';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialSLiceState: Pick<AppState, 'loadedFullOffer' | 'loadedNearOffers' | 'loadedComments' | 'isNewCommentLoading'> = {
@@ -62,6 +63,13 @@ export const fullOfferSlice = createSlice({
       })
       .addCase(postComment.rejected, (state) => {
         state.isNewCommentLoading = false;
+      })
+      .addCase(postFavorite.fulfilled, (state, action) => {
+        const {id, isFavorite} = action.payload;
+        if (id === state.loadedFullOffer.data?.id) {
+          state.loadedFullOffer.data.isFavorite = isFavorite;
+        }
+        updateOfferFavoriteFlag(state.loadedNearOffers.data, id, isFavorite);
       });
   }
 });

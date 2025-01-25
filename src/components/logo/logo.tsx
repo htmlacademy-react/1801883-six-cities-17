@@ -1,6 +1,7 @@
 import { AppRoute } from '../../consts';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
 
 type LogoProps = {
   logoType: keyof typeof LogoSettings;
@@ -19,7 +20,7 @@ const LogoSettings = {
 } as const;
 
 
-export default function Logo({logoType, isActive = false}: LogoProps): JSX.Element {
+function BaseLogo({logoType, isActive = false}: LogoProps): JSX.Element {
   const linkClass = classNames(`${logoType}__logo-link`, {
     'header__logo-link--active': isActive
   });
@@ -36,3 +37,5 @@ export default function Logo({logoType, isActive = false}: LogoProps): JSX.Eleme
     </Link>
   );
 }
+
+export const Logo = memo(BaseLogo);

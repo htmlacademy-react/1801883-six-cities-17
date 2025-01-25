@@ -1,4 +1,4 @@
-import Logo from '../logo/logo';
+import { Logo } from '../logo/logo';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getAuthorizationStatus, getUser } from '../../store/user/user-selectors';
 import UserInfo from './user-info/user-info';

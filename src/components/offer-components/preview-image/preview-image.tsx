@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type PreviewImageProps = {
   link: string;
   isSmall: boolean;
@@ -9,7 +11,7 @@ const Size = {
 } as const;
 
 
-export default function PreviewImage({link, isSmall}: PreviewImageProps): JSX.Element {
+function BasePreviewImage({link, isSmall}: PreviewImageProps): JSX.Element {
   const {width, height} = isSmall ? Size.Small : Size.Default;
 
   return (
@@ -22,3 +24,5 @@ export default function PreviewImage({link, isSmall}: PreviewImageProps): JSX.El
     />
   );
 }
+
+export const PreviewImage = memo(BasePreviewImage);

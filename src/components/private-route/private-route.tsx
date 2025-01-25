@@ -6,15 +6,24 @@ import { PropsWithChildren } from 'react';
 
 type PrivateRouteProps = PropsWithChildren<{
   redirectRoute: typeof AppRoute[keyof typeof AppRoute]['Path'];
+  isLogin?: boolean;
 }>
 
 
-export default function PrivateRoute({redirectRoute, children}: PrivateRouteProps) {
+export default function PrivateRoute({redirectRoute, isLogin = false, children}: PrivateRouteProps) {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  if (!isLogin) {
+    return (
+      authorizationStatus === AuthorizationStatus.Auth
+        ? children as JSX.Element
+        : <Navigate to={ redirectRoute } />
+    );
+  }
 
   return (
     authorizationStatus === AuthorizationStatus.Auth
-      ? children as JSX.Element
-      : <Navigate to={ redirectRoute } />
+      ? <Navigate to={ redirectRoute }/>
+      : children as JSX.Element
   );
 }

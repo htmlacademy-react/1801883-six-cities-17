@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type PriceProps = {
   price: number;
   isBigElement?: boolean;
@@ -9,7 +11,7 @@ const PriceClass = {
 } as const;
 
 
-export default function Price({price, isBigElement = false}: PriceProps): JSX.Element {
+function BasePrice({price, isBigElement = false}: PriceProps): JSX.Element {
   const extraClass = isBigElement ? PriceClass.BigElement : PriceClass.Default;
 
   return (
@@ -19,3 +21,5 @@ export default function Price({price, isBigElement = false}: PriceProps): JSX.El
     </div>
   );
 }
+
+export const Price = memo(BasePrice);

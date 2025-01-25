@@ -1,15 +1,15 @@
 import { Offer } from '../../types';
 import { AppRoute } from '../../consts';
 import { Link } from 'react-router-dom';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import classNames from 'classnames';
-import Premium from '../offer-components/premium/premium';
-import PreviewImage from '../offer-components/preview-image/preview-image';
-import Price from '../offer-components/price/price';
+import { Premium } from '../offer-components/premium/premium';
+import { PreviewImage } from '../offer-components/preview-image/preview-image';
+import { Price } from '../offer-components/price/price';
 import BookmarkButton from '../offer-components/bookmark-button/bookmark-button';
-import Rating from '../offer-components/rating/rating';
-import Title from '../offer-components/title/title';
-import Type from '../offer-components/type/type';
+import { Rating } from '../offer-components/rating/rating';
+import { Title } from '../offer-components/title/title';
+import { Type } from '../offer-components/type/type';
 
 type OfferCardProps = {
   offer: Offer;
@@ -35,10 +35,11 @@ const CardClass = {
 
 function BaseOfferCard({offer, cardType, handleOfferMouseOver}: OfferCardProps): JSX.Element {
   const {id, title, type, price, isFavorite, isPremium, rating, previewImage} = offer;
-  const currentLink = {
+  const currentLink = useMemo(() => ({
     path: AppRoute.Offer.Path.replace(':id', id),
     title: AppRoute.Offer.TitleLink
-  };
+  }), [id]);
+
   const cardHandlers = (cardType === 'Main' && handleOfferMouseOver) && {
     onMouseEnter: () => handleOfferMouseOver(offer),
     onMouseLeave: () => handleOfferMouseOver(null)
@@ -57,7 +58,7 @@ function BaseOfferCard({offer, cardType, handleOfferMouseOver}: OfferCardProps):
       <div className={classNames('place-card__info', {'favorites__card-info': cardType === 'Favorite'})}>
         <div className="place-card__price-wrapper">
           <Price price={ price }/>
-          <BookmarkButton isFavorite={ isFavorite } />
+          <BookmarkButton id={ id } isFavorite={ isFavorite } />
         </div>
 
         <Rating rating={ rating } />

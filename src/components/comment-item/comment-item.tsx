@@ -1,7 +1,7 @@
 import { Comment } from '../../types';
 import { memo } from 'react';
-import Avatar from '../avatar/avatar';
-import Rating from '../offer-components/rating/rating';
+import { Avatar } from '../avatar/avatar';
+import { Rating } from '../offer-components/rating/rating';
 
 type CommentItemProps = {
   userComment: Comment;

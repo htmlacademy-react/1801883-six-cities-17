@@ -50,4 +50,21 @@ const sortByPriceHigh = (offerA: Offer, offerB: Offer): number => offerB.price -
 
 const sortByRating = (offerA: Offer, offerB: Offer): number => offerB.rating - offerA.rating;
 
-export { generateRandomNumber, capitalizeFirstLetter, checkPluralRule, getPageName, sortOffersByCity, sortComments, sortByPriceLow, sortByPriceHigh, sortByRating };
+const updateOffersFavoriteFlag = (offers: Offer[], ids: string[]) => {
+  offers.forEach(
+    (offer) => {
+      offer.isFavorite = ids.includes(offer.id);
+    }
+  );
+};
+
+const updateOfferFavoriteFlag = (offers: Offer[], id: string, isFavorite: boolean) => {
+  const indexOffer = offers.findIndex((offer) => offer.id === id);
+
+  if (indexOffer !== -1) {
+    offers[indexOffer].isFavorite = isFavorite;
+  }
+};
+
+export { generateRandomNumber, capitalizeFirstLetter, checkPluralRule, getPageName, sortOffersByCity,
+  sortComments, sortByPriceLow, sortByPriceHigh, sortByRating, updateOffersFavoriteFlag, updateOfferFavoriteFlag };

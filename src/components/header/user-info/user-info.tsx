@@ -2,7 +2,7 @@ import { AppRoute } from '../../../consts';
 import { logout } from '../../../store/user/user-thunks';
 import { useAppDispatch } from '../../../hooks/use-app-dispatch';
 import { Link } from 'react-router-dom';
-import Avatar from '../../avatar/avatar';
+import { Avatar } from '../../avatar/avatar';
 
 type UserInfoProps = {
   isLogged?: boolean;

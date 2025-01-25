@@ -1,8 +1,7 @@
-import { CITIES, AppRoute } from '../../consts';
+import { CITIES } from '../../consts';
 import { generateRandomNumber } from '../../utils';
 import { login } from '../../store/user/user-thunks';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { TabItem } from '../../components/tab-item/tab-item';
 
@@ -11,7 +10,6 @@ export default function LoginPage(): JSX.Element {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleFormSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
@@ -20,12 +18,7 @@ export default function LoginPage(): JSX.Element {
       dispatch(login({
         email: emailRef.current.value,
         password: passwordRef.current.value
-      }))
-        .then(({meta}) => {
-          if (meta.requestStatus === 'fulfilled') {
-            navigate(AppRoute.Main.Path);
-          }
-        });
+      }));
     }
   };
 
