@@ -1,5 +1,5 @@
 import { UserShort } from '../../../types';
-import Avatar from '../../avatar/avatar';
+import { Avatar } from '../../avatar/avatar';
 
 type HostInformationProps = {
   description: string;

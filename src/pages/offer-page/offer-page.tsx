@@ -7,11 +7,11 @@ import { useParams } from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
 import Spinner from '../../components/spinner/spinner';
 import Gallery from '../../components/offer-components/gallery/gallery';
-import Premium from '../../components/offer-components/premium/premium';
+import { Premium } from '../../components/offer-components/premium/premium';
 import BookmarkButton from '../../components/offer-components/bookmark-button/bookmark-button';
-import Rating from '../../components/offer-components/rating/rating';
+import { Rating } from '../../components/offer-components/rating/rating';
 import Features from '../../components/offer-components/features/features';
-import Price from '../../components/offer-components/price/price';
+import { Price } from '../../components/offer-components/price/price';
 import Goods from '../../components/offer-components/goods/goods';
 import HostInformation from '../../components/offer-components/host-information/host-information';
 import CommentsBlock from '../../components/comments-block/comments-block';
@@ -42,7 +42,7 @@ export default function OfferPage(): JSX.Element {
     return <ErrorPage />;
   }
 
-  const {title, type, price, isFavorite, isPremium, rating, description, bedrooms, goods, host, images, maxAdults} = offer;
+  const {id, title, type, price, isFavorite, isPremium, rating, description, bedrooms, goods, host, images, maxAdults} = offer;
 
   return (
     <main className="page__main page__main--offer">
@@ -54,7 +54,7 @@ export default function OfferPage(): JSX.Element {
             {isPremium && <Premium isBigElement />}
             <div className="offer__name-wrapper">
               <h1 className="offer__name">{title}</h1>
-              <BookmarkButton isFavorite={ isFavorite } isBigElement />
+              <BookmarkButton id={ id } isFavorite={ isFavorite } isBigElement />
             </div>
             <Rating rating={ rating } type='BigElement'/>
             <Features type={ type } bedrooms={ bedrooms } maxAdults={ maxAdults }/>

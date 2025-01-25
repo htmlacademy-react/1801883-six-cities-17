@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../../components/header/header';
-import Logo from '../../components/logo/logo';
+import { Logo } from '../../components/logo/logo';
 
 
 export default function Layout(): JSX.Element {
