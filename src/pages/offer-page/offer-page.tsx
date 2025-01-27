@@ -1,7 +1,7 @@
-import { fetchFullOffer, fetchNearOffers, fetchComments } from '../../store/full-offer/full-offer-thunks';
+import { fetchFullOffer, fetchNearOffers, fetchComments } from '../../store/full-offer-slice/full-offer-thunks';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { getFullOffer, getNearOffers, getComments } from '../../store/full-offer/full-offer-selectors';
+import { getFullOffer, getNearOffers, getComments } from '../../store/full-offer-slice/full-offer-selectors';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';

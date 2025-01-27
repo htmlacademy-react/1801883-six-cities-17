@@ -37,25 +37,23 @@ const AuthorizationStatus = {
   Unknown: 'UNKNOWN'
 } as const;
 
-const RatingRange = { Min: 0, Max: 5 } as const;
-
 const SortType = {
   Popular: {
     Name: 'Popular',
-    sortMethod: () => 0,
+    SortMethod: () => 0,
   },
   PriceLow: {
     Name: 'Price: low to high',
-    sortMethod: sortByPriceLow,
+    SortMethod: sortByPriceLow,
   },
   PriceHigh: {
     Name: 'Price: high to low',
-    sortMethod: sortByPriceHigh,
+    SortMethod: sortByPriceHigh,
   },
   Rated: {
     Name: 'Top rated first',
-    sortMethod: sortByRating,
+    SortMethod: sortByRating,
   }
 } as const;
 
-export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus, RatingRange, SortType };
+export { CITIES, OFFER_TYPES, AppRoute, AuthorizationStatus, SortType };

@@ -1,7 +1,7 @@
 import { Offer } from '../../types';
 import { ThunkApiConfig } from '../types';
 import { APIRoute, SliceName } from '../consts';
-import { setOffers } from '../app/app-slice';
+import { setOffers } from '../app-slice/app-slice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 

@@ -1,7 +1,7 @@
-import { postComment } from '../../store/full-offer/full-offer-thunks';
+import { postComment } from '../../store/full-offer-slice/full-offer-thunks';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { getCommentLoadingStatus } from '../../store/full-offer/full-offer-selectors';
+import { getCommentLoadingStatus } from '../../store/full-offer-slice/full-offer-selectors';
 import { useParams } from 'react-router-dom';
 import { useCallback } from 'react';
 import { useState } from 'react';
@@ -9,8 +9,7 @@ import { toast } from 'react-toastify';
 import { RatingStar } from './rating-star/rating-star';
 
 const DEFAULT_RATING = 0;
-
-const StarSetting = [
+const STAR_SETTINGS = [
   { value: 5, title: 'perfect' },
   { value: 4, title: 'good' },
   { value: 3, title: 'not bad' },
@@ -60,14 +59,14 @@ export default function CommentForm(): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
-          StarSetting.map(({value, title}) => (
+          STAR_SETTINGS.map(({value, title}) => (
             <RatingStar
               key={ title }
               value={ value }
               title={ title }
               isChecked={ userRating === value }
               isDisabled={ isLoading }
-              handleStarChange={ handleStarChange }
+              onChange={ handleStarChange }
             />
           ))
         }

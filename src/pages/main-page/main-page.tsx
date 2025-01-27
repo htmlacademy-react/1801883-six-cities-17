@@ -1,6 +1,6 @@
 import { Offer } from '../../types';
-import { getOffersByCity, getCurrentCity } from '../../store/app/app-selectors';
-import { getLoadingStatus } from '../../store/offers/offers-selectors';
+import { getOffersByCity, getCurrentCity } from '../../store/app-slice/app-selectors';
+import { getLoadingStatus } from '../../store/offers-slice/offers-selectors';
 import { useState, useCallback } from 'react';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import classNames from 'classnames';
@@ -32,7 +32,7 @@ export default function MainPage(): JSX.Element {
         : (
           <div className="cities">
             <div className={classNames('cities__places-container container', {'cities__places-container--empty': isEmptyList})}>
-              <OfferCardsList offers={ offers } isEmptyList={ isEmptyList } currentCity={ currentCity } handleOfferMouseOver={ handleOfferMouseOver }/>
+              <OfferCardsList offers={ offers } isEmptyList={ isEmptyList } currentCity={ currentCity } onMouseOver={ handleOfferMouseOver }/>
               <div className="cities__right-section">
                 {isEmptyList || <Map offers={ offers } selectedOffer={ selectedOffer } />}
               </div>

@@ -1,6 +1,6 @@
 import { Comment } from '../../types';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getAuthorizationStatus } from '../../store/user/user-selectors';
+import { getAuthorizationStatus } from '../../store/user-slice/user-selectors';
 import { CommentItem } from '../comment-item/comment-item';
 import CommentForm from '../comment-form/comment-form';
 

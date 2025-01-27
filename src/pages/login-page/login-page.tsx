@@ -1,6 +1,6 @@
 import { CITIES } from '../../consts';
 import { generateRandomNumber } from '../../utils';
-import { login } from '../../store/user/user-thunks';
+import { login } from '../../store/user-slice/user-thunks';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useRef } from 'react';
 import { TabItem } from '../../components/tab-item/tab-item';

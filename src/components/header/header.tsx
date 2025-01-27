@@ -1,6 +1,6 @@
 import { Logo } from '../logo/logo';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getAuthorizationStatus, getUser } from '../../store/user/user-selectors';
+import { getAuthorizationStatus, getUser } from '../../store/user-slice/user-selectors';
 import UserInfo from './user-info/user-info';
 
 type HeaderProps = {
@@ -19,7 +19,7 @@ export default function Header({isLoginHidden = false, isMainPage = false, favor
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo logoType='header' isActive={ isMainPage } />
+            <Logo logoType='Header' isActive={ isMainPage } />
           </div>
 
           {isLoginHidden || (

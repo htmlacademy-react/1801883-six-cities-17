@@ -1,7 +1,7 @@
 import { CITIES } from '../../consts';
 import { sortOffersByCity } from '../../utils';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFavorites } from '../../store/favorites/favorites-selectors';
+import { getFavorites } from '../../store/favorites-slice/favorites-selectors';
 import classNames from 'classnames';
 import FavoritesCityItem from '../../components/favorites-city-item/favorites-city-item';
 

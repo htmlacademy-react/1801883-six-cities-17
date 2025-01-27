@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getAuthorizationStatus } from '../../store/user/user-selectors';
+import { getAuthorizationStatus } from '../../store/user-slice/user-selectors';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 import { PropsWithChildren } from 'react';
 

@@ -14,7 +14,7 @@ import { Type } from '../offer-components/type/type';
 type OfferCardProps = {
   offer: Offer;
   cardType: keyof typeof CardClass;
-  handleOfferMouseOver?: (id: Offer | null) => void;
+  onMouseOver?: (id: Offer | null) => void;
 }
 
 const CardClass = {
@@ -33,16 +33,16 @@ const CardClass = {
 } as const;
 
 
-function BaseOfferCard({offer, cardType, handleOfferMouseOver}: OfferCardProps): JSX.Element {
+function BaseOfferCard({offer, cardType, onMouseOver}: OfferCardProps): JSX.Element {
   const {id, title, type, price, isFavorite, isPremium, rating, previewImage} = offer;
   const currentLink = useMemo(() => ({
     path: AppRoute.Offer.Path.replace(':id', id),
     title: AppRoute.Offer.TitleLink
   }), [id]);
 
-  const cardHandlers = (cardType === 'Main' && handleOfferMouseOver) && {
-    onMouseEnter: () => handleOfferMouseOver(offer),
-    onMouseLeave: () => handleOfferMouseOver(null)
+  const cardHandlers = (cardType === 'Main' && onMouseOver) && {
+    onMouseEnter: () => onMouseOver(offer),
+    onMouseLeave: () => onMouseOver(null)
   };
 
   return (
