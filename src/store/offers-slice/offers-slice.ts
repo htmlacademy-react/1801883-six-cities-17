@@ -1,8 +1,8 @@
 import { AppState } from '../types';
 import { SliceName, LoadingStatus } from '../consts';
 import { fetchOffers } from './offers-thunks';
-import { fetchFavorites, postFavorite } from '../favorites/favorites-thunks';
-import { logout } from '../user/user-thunks';
+import { fetchFavorites, postFavorite } from '../favorites-slice/favorites-thunks';
+import { logout } from '../user-slice/user-thunks';
 import { createSlice } from '@reduxjs/toolkit';
 import { updateOffersFavoriteFlag, updateOfferFavoriteFlag } from '../../utils';
 

@@ -2,7 +2,7 @@ import { User } from '../../types';
 import { ThunkApiConfig, LoginData } from '../types';
 import { APIRoute, SliceName } from '../consts';
 import { saveToken, dropToken } from '../../services/token';
-import { fetchFavorites } from '../favorites/favorites-thunks';
+import { fetchFavorites } from '../favorites-slice/favorites-thunks';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 

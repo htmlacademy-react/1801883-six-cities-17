@@ -5,7 +5,7 @@ import { getToken } from './token';
 
 const BACKEND_URL = 'https://16.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
-const EnabledStatusCodes: Record<number, boolean> = {
+const EnabledStatusCode: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: false,
   [StatusCodes.NOT_FOUND]: true,
@@ -31,7 +31,7 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<{status: number; message: string}>) => {
-      if (error.status && EnabledStatusCodes[error.status]) {
+      if (error.status && EnabledStatusCode[error.status]) {
         toast.warn(error.message);
         throw error;
       }

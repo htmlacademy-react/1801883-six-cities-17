@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { changeCity } from '../../store/app/app-slice';
+import { changeCity } from '../../store/app-slice/app-slice';
 import { memo } from 'react';
 import classNames from 'classnames';
 import { Cities } from '../../types';
@@ -10,7 +10,6 @@ type TabItemProps = {
   city: Cities;
   isListItem?: boolean;
   isActive?: boolean;
-
 }
 
 

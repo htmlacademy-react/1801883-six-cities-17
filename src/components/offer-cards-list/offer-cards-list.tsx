@@ -2,7 +2,7 @@ import { SortType } from '../../consts';
 import { Offer, Cities } from '../../types';
 import classNames from 'classnames';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getSortType } from '../../store/app/app-selectors';
+import { getSortType } from '../../store/app-slice/app-selectors';
 import { memo, useMemo, useRef, useEffect } from 'react';
 import { MainListInfo } from './main-list-info/main-list-info';
 import { OfferCard } from '../offer-card/offer-card';
@@ -13,7 +13,7 @@ type OfferCardsListProps = {
   isEmptyList: boolean;
   currentCity: Cities;
   listType?: keyof typeof ListClassName;
-  handleOfferMouseOver?: (id: Offer | null) => void;
+  onMouseOver?: (id: Offer | null) => void;
 };
 
 const ListClassName = {
@@ -31,7 +31,7 @@ const ListClassName = {
 } as const;
 
 
-function BaseOfferCardsList({offers, isEmptyList, currentCity, listType = 'Main', handleOfferMouseOver}: OfferCardsListProps): JSX.Element {
+function BaseOfferCardsList({offers, isEmptyList, currentCity, listType = 'Main', onMouseOver}: OfferCardsListProps): JSX.Element {
   const section = useRef<HTMLElement>(null);
   useEffect(() => {
     if (section.current) {
@@ -43,7 +43,7 @@ function BaseOfferCardsList({offers, isEmptyList, currentCity, listType = 'Main'
   }, [currentCity]);
 
   const sortType = useAppSelector(getSortType);
-  const sortedOffers = useMemo(() => [...offers].sort(SortType[sortType].sortMethod), [offers, sortType]);
+  const sortedOffers = useMemo(() => [...offers].sort(SortType[sortType].SortMethod), [offers, sortType]);
 
   const sectionClass = classNames({
     [ListClassName.Main.Section.FilledList]: listType === 'Main' && !isEmptyList,
@@ -58,7 +58,7 @@ function BaseOfferCardsList({offers, isEmptyList, currentCity, listType = 'Main'
 
       {isEmptyList || (
         <div className={ classNames('places__list', ListClassName[listType].Div) }>
-          {sortedOffers.map((offer: Offer) => <OfferCard key={ offer.id } offer={ offer } cardType={ listType } handleOfferMouseOver={ handleOfferMouseOver }/>)}
+          {sortedOffers.map((offer: Offer) => <OfferCard key={ offer.id } offer={ offer } cardType={ listType } onMouseOver={ onMouseOver }/>)}
         </div>
       )}
     </section>

@@ -1,10 +1,14 @@
-import { RatingRange } from '../../../consts';
 import { memo } from 'react';
 
 type RatingProps = {
   rating: number;
   type?: keyof typeof RatingClass;
 }
+
+const RatingRange = {
+  Min: 0,
+  Max: 5
+} as const;
 
 const RatingClass = {
   Base: 'place-card',

@@ -1,7 +1,7 @@
 import { SortType } from '../../consts';
 import { SortingType } from '../../types';
-import { getSortType } from '../../store/app/app-selectors';
-import { changeSortType } from '../../store/app/app-slice';
+import { getSortType } from '../../store/app-slice/app-selectors';
+import { changeSortType } from '../../store/app-slice/app-slice';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useState } from 'react';

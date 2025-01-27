@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 type PreviewImageProps = {
   link: string;
@@ -6,20 +6,20 @@ type PreviewImageProps = {
 }
 
 const Size = {
-  Default: {width: 260, height: 200},
-  Small: {width: 150, height: 110}
+  Default: {Width: 260, Height: 200},
+  Small: {Width: 150, Height: 110}
 } as const;
 
 
 function BasePreviewImage({link, isSmall}: PreviewImageProps): JSX.Element {
-  const {width, height} = isSmall ? Size.Small : Size.Default;
+  const size = useMemo(() => isSmall ? Size.Small : Size.Default, [isSmall]);
 
   return (
     <img
       className="place-card__image"
       src={ link }
-      width={ width }
-      height={ height }
+      width={ size.Width }
+      height={ size.Height }
       alt="Place image"
     />
   );

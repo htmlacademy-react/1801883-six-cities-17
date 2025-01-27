@@ -1,7 +1,7 @@
 import { AppRoute } from '../../consts';
 import { getPageName } from '../../utils';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFavorites } from '../../store/favorites/favorites-selectors';
+import { getFavorites } from '../../store/favorites-slice/favorites-selectors';
 import { Helmet } from 'react-helmet-async';
 import classNames from 'classnames';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -33,7 +33,7 @@ export default function Layout(): JSX.Element {
       {currentPageName === 'Favorites' &&
       (
         <footer className="footer container">
-          <Logo logoType='footer' />
+          <Logo logoType='Footer' />
         </footer>
       )}
     </div>

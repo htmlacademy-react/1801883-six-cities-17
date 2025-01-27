@@ -1,7 +1,7 @@
 import { AppState } from '../types';
 import { SliceName, LoadingStatus } from '../consts';
 import { fetchFavorites, postFavorite } from './favorites-thunks';
-import { logout } from '../user/user-thunks';
+import { logout } from '../user-slice/user-thunks';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialSLiceState: Pick<AppState, 'loadedFavorites'> = {

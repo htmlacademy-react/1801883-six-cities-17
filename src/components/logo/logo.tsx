@@ -4,35 +4,35 @@ import { Link } from 'react-router-dom';
 import { memo } from 'react';
 
 type LogoProps = {
-  logoType: keyof typeof LogoSettings;
+  logoType: keyof typeof LogoSetting;
   isActive?: boolean;
 }
 
-const LogoSettings = {
-  header: {
-    width: 81,
-    height: 41
+const LogoSetting = {
+  Header: {
+    Class: 'header',
+    Width: 81,
+    Height: 41
   },
-  footer: {
-    width: 64,
-    height: 33
+  Footer: {
+    Class: 'footer',
+    Width: 64,
+    Height: 33
   }
 } as const;
 
 
 function BaseLogo({logoType, isActive = false}: LogoProps): JSX.Element {
-  const linkClass = classNames(`${logoType}__logo-link`, {
-    'header__logo-link--active': isActive
-  });
+  const linkClass = classNames(`${LogoSetting[logoType].Class}__logo-link`, {'header__logo-link--active': isActive});
 
   return (
     <Link to={ AppRoute.Main.Path } className={ linkClass } title={ AppRoute.Main.TitleLink }>
       <img
-        className={ `${logoType}__logo` }
+        className={ `${LogoSetting[logoType].Class}__logo` }
         src="img/logo.svg"
         alt="6 cities logo"
-        width={ LogoSettings[logoType].width }
-        height={ LogoSettings[logoType].height }
+        width={ LogoSetting[logoType].Width }
+        height={ LogoSetting[logoType].Height }
       />
     </Link>
   );

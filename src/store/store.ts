@@ -1,9 +1,9 @@
 import { SliceName } from './consts';
-import { appSlice } from './app/app-slice';
-import { offersSlice } from './offers/offers-slice';
-import { favoritesSlice } from './favorites/favorites-slice';
-import { fullOfferSlice } from './full-offer/full-offer-slice';
-import { userSlice } from './user/user-slice';
+import { appSlice } from './app-slice/app-slice';
+import { offersSlice } from './offers-slice/offers-slice';
+import { favoritesSlice } from './favorites-slice/favorites-slice';
+import { fullOfferSlice } from './full-offer-slice/full-offer-slice';
+import { userSlice } from './user-slice/user-slice';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { createAPI } from '../services/api';
 

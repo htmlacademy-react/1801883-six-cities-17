@@ -1,8 +1,8 @@
 import { AuthorizationStatus, AppRoute } from '../../../consts';
 import { useAppDispatch } from '../../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../../hooks/use-app-selector';
-import { getAuthorizationStatus } from '../../../store/user/user-selectors';
-import { postFavorite } from '../../../store/favorites/favorites-thunks';
+import { getAuthorizationStatus } from '../../../store/user-slice/user-selectors';
+import { postFavorite } from '../../../store/favorites-slice/favorites-thunks';
 import { useNavigate } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 

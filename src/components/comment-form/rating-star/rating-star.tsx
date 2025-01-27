@@ -5,11 +5,11 @@ type RatingStarProps = {
   title: string;
   isChecked: boolean;
   isDisabled: boolean;
-  handleStarChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 
-function BaseRatingStar({value, title, isChecked, isDisabled, handleStarChange}: RatingStarProps): JSX.Element {
+function BaseRatingStar({value, title, isChecked, isDisabled, onChange}: RatingStarProps): JSX.Element {
   return (
     <>
       <input
@@ -20,7 +20,7 @@ function BaseRatingStar({value, title, isChecked, isDisabled, handleStarChange}:
         type="radio"
         disabled={ isDisabled }
         checked={ isChecked }
-        onChange={ handleStarChange }
+        onChange={ onChange }
       />
 
       <label htmlFor={ `${value}-stars` } className="reviews__rating-label form__rating-label" title={ title }>

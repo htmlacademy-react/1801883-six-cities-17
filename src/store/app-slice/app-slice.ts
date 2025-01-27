@@ -2,8 +2,8 @@ import { AppState } from '../types';
 import { Offer, Cities, SortingType } from '../../types';
 import { CITIES } from '../../consts';
 import { SliceName } from '../consts';
-import { fetchFavorites, postFavorite } from '../favorites/favorites-thunks';
-import { logout } from '../user/user-thunks';
+import { fetchFavorites, postFavorite } from '../favorites-slice/favorites-thunks';
+import { logout } from '../user-slice/user-thunks';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { sortOffersByCity, updateOffersFavoriteFlag, updateOfferFavoriteFlag } from '../../utils';
 

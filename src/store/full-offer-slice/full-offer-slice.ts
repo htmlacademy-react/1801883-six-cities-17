@@ -2,7 +2,7 @@ import { AppState } from '../types';
 import { MAX_NEAR_OFFERS_NUMBER } from '../consts';
 import { SliceName, LoadingStatus } from '../consts';
 import { fetchFullOffer, fetchNearOffers, fetchComments, postComment } from './full-offer-thunks';
-import { postFavorite } from '../favorites/favorites-thunks';
+import { postFavorite } from '../favorites-slice/favorites-thunks';
 import { sortComments, updateOfferFavoriteFlag } from '../../utils';
 import { createSlice } from '@reduxjs/toolkit';
 
